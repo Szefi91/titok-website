@@ -37,7 +37,7 @@ export default function GlobalSecrets() {
             setIsIdle(false);
             scrollCount.current = 0;
             if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-            idleTimerRef.current = setTimeout(() => setIsIdle(true), 60000); // 60s idle (1 minute)
+            idleTimerRef.current = setTimeout(() => setIsIdle(true), 20000); // 20s idle
         };
 
         window.addEventListener("mousemove", resetIdle);
@@ -61,38 +61,39 @@ export default function GlobalSecrets() {
             if (isIdle) {
                 scrollCount.current += 1;
 
-                if (scrollCount.current >= 3) {
-                    window.scrollTo({
-                        top: document.body.scrollHeight,
-                        behavior: "smooth"
-                    });
-                    scrollCount.current = 0;
-                } else {
-                    window.scrollBy({
-                        top: 250,
-                        behavior: "smooth"
-                    });
-                }
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: "smooth"
+                });
+                scrollCount.current = 0;
+                // Trigger the hint event
+                window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
+            } else {
+                window.scrollBy({
+                    top: 250,
+                    behavior: "smooth"
+                });
             }
-        }, 10000); // Every 10s
-        return () => clearInterval(interval);
-    }, [isIdle]);
+        }
+        }, 5000); // Every 5s while idle for faster aggressive movement
+    return () => clearInterval(interval);
+}, [isIdle]);
 
-    if (!scareActive) return null;
+if (!scareActive) return null;
 
-    return (
-        <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center animate-in fade-in duration-500">
-            <div className="relative w-full h-full max-w-4xl max-h-[80vh]">
-                <Image
-                    src="/eye.gif"
-                    alt="WATCHING"
-                    fill
-                    className="object-contain"
-                    unoptimized
-                />
-            </div>
-            <div className="absolute inset-0 bg-red-900/10 pointer-events-none animate-pulse z-[201]" />
-            <div className="absolute inset-0 bg-black/40 pointer-events-none z-[199]" />
+return (
+    <div className="fixed inset-0 z-[200] bg-black flex items-center justify-center animate-in fade-in duration-500">
+        <div className="relative w-full h-full max-w-4xl max-h-[80vh]">
+            <Image
+                src="/eye.gif"
+                alt="WATCHING"
+                fill
+                className="object-contain"
+                unoptimized
+            />
         </div>
-    );
+        <div className="absolute inset-0 bg-red-900/10 pointer-events-none animate-pulse z-[201]" />
+        <div className="absolute inset-0 bg-black/40 pointer-events-none z-[199]" />
+    </div>
+);
 }

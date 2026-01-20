@@ -1,4 +1,17 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import TypingText from "./effects/TypingText";
+
 export default function Shop() {
+    const [showHint, setShowHint] = useState(false);
+
+    useEffect(() => {
+        const handleHint = () => setShowHint(true);
+        window.addEventListener("ghost-scroll-complete", handleHint);
+        return () => window.removeEventListener("ghost-scroll-complete", handleHint);
+    }, []);
+
     const items = [
         { id: 1, name: "VHS Kazetta (Törölt jelenetek)", price: "TITOK", status: "ELFOGYOTT" },
         { id: 2, name: "A Maszk (Replika)", price: "---", status: "TILTOTT" },
@@ -39,10 +52,15 @@ export default function Shop() {
                     ))}
                 </div>
 
-                <div className="mt-16 p-8 border border-dashed border-white/5 text-center opacity-20">
-                    <p className="text-muted font-mono text-xs uppercase tracking-[0.5em]">
+                <div className="mt-16 p-8 border border-dashed border-white/5 text-center min-h-[120px] flex flex-col items-center justify-center">
+                    <p className="text-muted font-mono text-xs uppercase tracking-[0.5em] opacity-20">
                         &gt; AZ ADATOK TITKOSÍTÁS ALATT ÁLLNAK...
                     </p>
+                    {showHint && (
+                        <div className="mt-4 text-red-600 font-mono text-sm tracking-widest uppercase">
+                            <TypingText text="csak pötyögd be hogy T-I-T-O-K" speed={50} />
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
