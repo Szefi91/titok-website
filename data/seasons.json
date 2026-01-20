@@ -1,0 +1,27 @@
+{
+  "seriesTitle": "TITOK",
+  "promoSeason": 4,
+  "seasons": [
+    {
+      "number": 1,
+      "title": "1. Évad",
+      "youtubePlaylistUrl": "https://www.youtube.com/watch?v=GV_QojhH9pk&list=PL22WkYqXKep_HgheWgrK1FskiWLw6aodW",
+      "description": "A kezdet. Az első jelek. Egy barátság, ami rémálommá válik.",
+      "episodes": []
+    },
+    {
+      "number": 2,
+      "title": "2. Évad",
+      "youtubePlaylistUrl": "https://www.youtube.com/watch?v=-EbdROL8DFA&list=PL22WkYqXKep8v29udfzUpCjWDJuKHya4b",
+      "description": "A rejtély mélyül. Új helyszínek, új fenyegetés. Nincs menekvés.",
+      "episodes": []
+    },
+    {
+      "number": 3,
+      "title": "3. Évad",
+      "youtubePlaylistUrl": "https://www.youtube.com/watch?v=3OBL_qooSNc&list=PL22WkYqXKep9I7YDQttVYSw5Yo_6aTJEd",
+      "description": "A valóság repedése. Amikor a legenda túl sok valóságban válik igazzá.",
+      "episodes": []
+    }
+  ]
+}
