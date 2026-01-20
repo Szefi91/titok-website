@@ -10,10 +10,12 @@ import CrackEffect from "@/components/effects/CrackEffect";
 import FloatingQuotes from "@/components/effects/FloatingQuotes";
 import FlashlightEffect from "@/components/effects/FlashlightEffect";
 import GlobalSecrets from "@/components/effects/GlobalSecrets";
+import VisibilityHandler from "@/components/effects/VisibilityHandler";
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#050505] relative cursor-none-custom">
+      <VisibilityHandler />
       <CrackEffect />
       <FlashlightEffect />
       <GlobalSecrets />
