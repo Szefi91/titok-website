@@ -51,9 +51,9 @@ export default function Footer() {
                 </div>
 
                 <div className="absolute top-1/2 right-10 md:right-40 -translate-y-1/2 text-white/10 font-mono text-[10px] text-right hidden lg:block">
-                    [SYSTEM_LOG] <br />
-                    FILE_OBS_031 <br />
-                    STATUS: WATCHING
+                    [HIBÁS EMLÉK] <br />
+                    MOND KI <br />
+                    A NEVÉT
                 </div>
             </div>
         </footer>

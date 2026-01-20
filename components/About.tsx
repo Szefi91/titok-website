@@ -20,7 +20,7 @@ export default function About() {
                         mint bármi, amit eddig készítettünk.
                     </p>
                     <p className="italic opacity-60">
-                        "<RGBSplitText text="Ez már nem az a Szefi, akit én ismerek..." autoTrigger={false} />"
+                        "<RGBSplitText text="ne nézz a szekrény alá" autoTrigger={false} />"
                     </p>
                 </div>
             </div>

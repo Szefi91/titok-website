@@ -67,10 +67,10 @@ export default function SeasonsGrid() {
                 }}
             >
                 <div className="absolute top-10 right-10 text-white/40 font-mono text-xs tracking-widest uppercase">
-                    A FIGYELŐ MINDENT LÁT
+                    add vissza...
                 </div>
                 <div className="absolute bottom-10 left-10 text-accent/60 font-serif italic text-2xl">
-                    "Silkáde..."
+                    "silkade...."
                 </div>
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 font-heading text-[15rem] leading-none opacity-20">
                     TITOK
