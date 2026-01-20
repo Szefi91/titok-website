@@ -67,8 +67,10 @@ export default function GlobalSecrets() {
                         behavior: "smooth"
                     });
                     scrollCount.current = 0;
-                    // Trigger the hint event in Shop.tsx
-                    window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
+                    // Trigger the hint event in Shop.tsx with a slight delay to allow scroll to finish
+                    setTimeout(() => {
+                        window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
+                    }, 1000);
                 } else {
                     window.scrollBy({
                         top: 250,
