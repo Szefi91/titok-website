@@ -114,19 +114,19 @@ export default function Hero() {
             >
                 {cluePositions && (
                     <>
-                        {/* Hidden Text 1: Mysterious Phrase 1 */}
+                        {/* Hidden Text 1: Timestamp */}
                         <div className="absolute select-none hidden md:block" style={cluePositions.timestamp}>
                             <div className="text-right font-mono">
-                                <p className="text-accent font-bold text-2xl tracking-tighter">3 újja van</p>
-                                <p className="text-sm text-white/90">az egyik kezén</p>
+                                <p className="text-accent font-bold text-2xl tracking-tighter">03x07</p>
+                                <p className="text-sm text-white/90">16:30-40</p>
                             </div>
                         </div>
 
-                        {/* Hidden Text 2: Mysterious Phrase 2 */}
+                        {/* Hidden Text 2: Binary */}
                         <div className="absolute select-none hidden md:block" style={cluePositions.binary}>
                             <div className="font-heading">
-                                <p className="text-accent/60 text-base tracking-widest">ez egy hang fal</p>
-                                <p className="text-[10px] text-white/50 mt-1 uppercase tracking-widest">valaki áll mögötted</p>
+                                <p className="text-accent/60 text-base tracking-widest">01001101 01000001 01010100 01000101</p>
+                                <p className="text-[10px] text-white/50 mt-1 uppercase tracking-widest">Figyellek téged...</p>
                             </div>
                         </div>
 
