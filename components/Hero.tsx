@@ -117,7 +117,7 @@ export default function Hero() {
                         {/* Hidden Text 1: Timestamp */}
                         <div className="absolute select-none hidden md:block" style={cluePositions.timestamp}>
                             <div className="text-right font-mono">
-                                <p className="text-accent font-bold text-2xl tracking-tighter">03x07</p>
+                                <p className="text-accent font-bold text-2xl tracking-tighter">S03x07</p>
                                 <p className="text-sm text-white/90">16:30-40</p>
                             </div>
                         </div>
