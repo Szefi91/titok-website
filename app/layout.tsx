@@ -15,6 +15,28 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   title: "TITOK - Horror Sorozat | 4. Évad",
   description: "A TITOK horror sorozat hivatalos oldala. 4. évad hamarosan. Nézd vissza az előző évadokat, és csatlakozz a rejtélyhez.",
+  openGraph: {
+    title: "TITOK - Horror Sorozat | 4. Évad",
+    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről",
+    url: "https://titoksorozat.hu",
+    siteName: "TITOK",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "TITOK - 4. Évad",
+      },
+    ],
+    locale: "hu_HU",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "TITOK - Horror Sorozat | 4. Évad",
+    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
