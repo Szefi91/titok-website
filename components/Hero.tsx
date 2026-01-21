@@ -130,34 +130,34 @@ export default function Hero() {
                 {cluePositions && (
                     <>
                         {/* Hidden Text 1: Timestamp */}
-                        <div className="absolute select-none hidden md:block" style={cluePositions.timestamp}>
+                        <div className="absolute select-none" style={cluePositions.timestamp}>
                             <div className="text-right font-mono">
-                                <p className="text-accent font-bold text-2xl tracking-tighter">S03x07</p>
-                                <p className="text-sm text-white/90">16:30-40</p>
+                                <p className="text-accent font-bold text-lg md:text-2xl tracking-tighter">S03x07</p>
+                                <p className="text-xs md:text-sm text-white/90">16:30-40</p>
                             </div>
                         </div>
 
                         {/* Hidden Text 2: Binary */}
-                        <div className="absolute select-none hidden md:block" style={cluePositions.binary}>
+                        <div className="absolute select-none" style={cluePositions.binary}>
                             <div className="font-heading">
-                                <p className="text-accent/60 text-base tracking-widest">01001101 01000001 01010100 01000101</p>
-                                <p className="text-[10px] text-white/50 mt-1 uppercase tracking-widest">Figyellek téged...</p>
+                                <p className="text-accent/60 text-xs md:text-base tracking-widest">01001101 01000001 01010100 01000101</p>
+                                <p className="text-[8px] md:text-[10px] text-white/50 mt-1 uppercase tracking-widest">Figyellek téged...</p>
                             </div>
                         </div>
 
                         {/* Hidden Image 1: Kos ami kussol */}
-                        <div className="absolute select-none hidden md:block opacity-40 grayscale" style={cluePositions.image1}>
-                            <div className="relative w-40 h-40 md:w-56 md:h-56">
+                        <div className="absolute select-none opacity-40 grayscale" style={cluePositions.image1}>
+                            <div className="relative w-24 h-24 md:w-56 md:h-56">
                                 <Image src="/kos_ami_kussol.png" alt="CLUE_1" fill className="object-contain" />
-                                <p className="absolute -bottom-4 left-0 text-[8px] font-mono text-white/20">FILE: KOS_AMI_KUSSOL.PNG</p>
+                                <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: KOS_AMI_KUSSOL.PNG</p>
                             </div>
                         </div>
 
                         {/* Hidden Image 2: Maszk */}
-                        <div className="absolute select-none hidden md:block opacity-40 grayscale" style={cluePositions.image2}>
-                            <div className="relative w-40 h-40 md:w-56 md:h-56">
+                        <div className="absolute select-none opacity-40 grayscale" style={cluePositions.image2}>
+                            <div className="relative w-24 h-24 md:w-56 md:h-56">
                                 <Image src="/maszk.png" alt="CLUE_2" fill className="object-contain" />
-                                <p className="absolute -bottom-4 right-0 text-[8px] font-mono text-white/20">FILE: MASZK.PNG</p>
+                                <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: MASZK.PNG</p>
                             </div>
                         </div>
                     </>
