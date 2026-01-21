@@ -6,8 +6,10 @@ import { useState, useEffect } from "react";
 export default function Header() {
     const [pageLoadCount, setPageLoadCount] = useState(0);
     const [showSecretBtn, setShowSecretBtn] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
         // Get load count from localStorage
         const count = parseInt(localStorage.getItem("pageLoadCount") || "0");
         const newCount = count + 1;
