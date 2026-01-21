@@ -8,6 +8,12 @@ export default function GlobalSecrets() {
     const [mobileInput, setMobileInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
+    const [scareActive, setScareActive] = useState(false);
+    const [isIdle, setIsIdle] = useState(false);
+    const inputBuffer = useRef("");
+    const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
+    const scrollCount = useRef(0);
+
     // 1. Secret Code Listener: "TITOK" & Mobile Tap Trigger
     useEffect(() => {
         let tapCount = 0;
