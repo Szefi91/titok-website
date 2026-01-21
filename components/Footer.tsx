@@ -8,17 +8,32 @@ export default function Footer() {
     const containerRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMove = (x: number, y: number) => {
             if (containerRef.current) {
                 const rect = containerRef.current.getBoundingClientRect();
                 setMousePos({
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top,
+                    x: x - rect.left,
+                    y: y - rect.top,
                 });
             }
         };
+
+        const handleMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches[0]) {
+                handleMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
         window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
+        window.addEventListener("touchstart", handleTouchMove);
+        window.addEventListener("touchmove", handleTouchMove);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("touchstart", handleTouchMove);
+            window.removeEventListener("touchmove", handleTouchMove);
+        };
     }, []);
 
     return (

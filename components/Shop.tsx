@@ -30,9 +30,16 @@ export default function Shop() {
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {items.map(item => (
-                        <div key={item.id} className="group relative bg-black/40 border border-white/5 p-10 hover:border-red-900/50 transition-all duration-300 overflow-hidden cursor-not-allowed min-h-[300px] flex flex-col justify-center">
+                        <div
+                            key={item.id}
+                            className="group relative bg-black/40 border border-white/5 p-10 hover:border-red-900/50 active:border-red-600 transition-all duration-300 overflow-hidden cursor-not-allowed min-h-[300px] flex flex-col justify-center"
+                            onClick={(e) => {
+                                // On mobile, a click can trigger the hover state
+                                // We don't need extra JS necessarily if we use active: classes
+                            }}
+                        >
                             {/* Hidden "Not Available" overlay - Hungarian */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-10 bg-black/90">
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 pointer-events-none z-10 bg-black/90">
                                 <span className="text-red-600 font-heading text-xl tracking-[0.1em] text-center px-6 leading-tight">
                                     A TARTALOM <br /> NEM ELÉRHETŐ
                                 </span>

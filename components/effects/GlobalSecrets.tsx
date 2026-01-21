@@ -10,8 +10,11 @@ export default function GlobalSecrets() {
     const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
     const scrollCount = useRef(0);
 
-    // 1. Secret Code Listener: "TITOK"
+    // 1. Secret Code Listener: "TITOK" & Mobile Tap Trigger
     useEffect(() => {
+        let tapCount = 0;
+        let lastTap = 0;
+
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key.length !== 1) return;
             inputBuffer.current = (inputBuffer.current + e.key.toUpperCase()).slice(-5);
@@ -22,13 +25,35 @@ export default function GlobalSecrets() {
             }
         };
 
+        const handleMobileTrigger = (e: MouseEvent | TouchEvent) => {
+            // If user taps the top area (logo area) multiple times
+            if ('clientY' in e && e.clientY < 100) {
+                const now = Date.now();
+                if (now - lastTap < 500) {
+                    tapCount++;
+                } else {
+                    tapCount = 1;
+                }
+                lastTap = now;
+
+                if (tapCount >= 5) {
+                    triggerEyeScare();
+                    tapCount = 0;
+                }
+            }
+        };
+
         const triggerEyeScare = () => {
             setScareActive(true);
             setTimeout(() => setScareActive(false), 3500);
         };
 
         window.addEventListener("keydown", handleKeyDown);
-        return () => window.removeEventListener("keydown", handleKeyDown);
+        window.addEventListener("click", handleMobileTrigger);
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+            window.removeEventListener("click", handleMobileTrigger);
+        };
     }, []);
 
     // 2. Ghost Scroll Logic

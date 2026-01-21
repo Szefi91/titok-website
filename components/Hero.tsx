@@ -45,17 +45,32 @@ export default function Hero() {
             image2: imagePositions[iIdx2]
         });
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMove = (x: number, y: number) => {
             if (containerRef.current) {
                 const rect = containerRef.current.getBoundingClientRect();
                 setMousePos({
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top,
+                    x: x - rect.left,
+                    y: y - rect.top,
                 });
             }
         };
+
+        const handleMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches[0]) {
+                handleMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        };
+
         window.addEventListener("mousemove", handleMouseMove);
-        return () => window.removeEventListener("mousemove", handleMouseMove);
+        window.addEventListener("touchstart", handleTouchMove);
+        window.addEventListener("touchmove", handleTouchMove);
+
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("touchstart", handleTouchMove);
+            window.removeEventListener("touchmove", handleTouchMove);
+        };
     }, [textPositions, imagePositions]);
 
     return (
@@ -68,7 +83,7 @@ export default function Hero() {
 
             {/* Content Container */}
             <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-4 text-white tracking-widest whitespace-nowrap flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-4 text-white tracking-widest whitespace-normal md:whitespace-nowrap flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
                     <TypingText text="TITOK" speed={150} showCursor={false} />
                     <span className="text-accent">
                         <TypingText text="4. ÉVAD HAMAROSAN" speed={100} delay={1000} showCursor={true} />

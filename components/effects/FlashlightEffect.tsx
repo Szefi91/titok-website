@@ -7,10 +7,16 @@ export default function FlashlightEffect() {
     const [opacity, setOpacity] = useState(0.25); // Increased base intensity
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setPos({ x: e.clientX, y: e.clientY });
-            // Set CSS variables for masked elements to use the same opacity/flicker
+        const handleMove = (clientX: number, clientY: number) => {
+            setPos({ x: clientX, y: clientY });
             document.documentElement.style.setProperty("--flashlight-opacity", "1");
+        };
+
+        const handleMouseMove = (e: MouseEvent) => handleMove(e.clientX, e.clientY);
+        const handleTouchMove = (e: TouchEvent) => {
+            if (e.touches[0]) {
+                handleMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
         };
 
         // Flickering logic
@@ -40,10 +46,14 @@ export default function FlashlightEffect() {
         };
 
         window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("touchstart", handleTouchMove, { passive: false });
+        window.addEventListener("touchmove", handleTouchMove, { passive: false });
         const flickerTimeout = setTimeout(flicker, 1000);
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("touchstart", handleTouchMove);
+            window.removeEventListener("touchmove", handleTouchMove);
             clearTimeout(flickerTimeout);
         };
     }, []);

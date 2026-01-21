@@ -31,6 +31,12 @@ export default function RGBSplitText({ text, className = "", autoTrigger = true 
             className={`relative inline-block cursor-default group ${className}`}
             onMouseEnter={() => !autoTrigger && setIsGlitching(true)}
             onMouseLeave={() => !autoTrigger && setIsGlitching(false)}
+            onClick={() => {
+                if (!autoTrigger) {
+                    setIsGlitching(true);
+                    setTimeout(() => setIsGlitching(false), 1000);
+                }
+            }}
         >
             {/* Main Text */}
             <span className="relative z-10">{text}</span>
