@@ -76,7 +76,7 @@ export default function GlobalSecrets() {
             // Shake effect or error? Just clear for now
             setMobileInput("");
             // Maybe close or just blink red border... let's keep it simple
-            alert("ACCESS DENIED");
+            alert("HOZZÁFÉRÉS MEGTAGADVA");
         }
     };
 
@@ -110,8 +110,8 @@ export default function GlobalSecrets() {
                     X
                 </button>
                 <div className="mb-8 text-green-800 text-xs tracking-widest uppercase">
-                    &gt; SECURE TERM_INAL V.4.0 <br />
-                    &gt; ENTER PASSKEY:
+                    &gt; BIZTONSÁGI RENDSZER V.4.0 <br />
+                    &gt; JELSZÓ MEGADÁSA:
                 </div>
                 <form onSubmit={handleTerminalSubmit} className="flex flex-col gap-4">
                     <input
@@ -125,7 +125,7 @@ export default function GlobalSecrets() {
                         maxLength={10}
                     />
                     <button type="submit" className="bg-green-900/20 border border-green-900 text-green-700 py-3 hover:bg-green-900/40 hover:text-green-400 transition-colors uppercase tracking-widest text-sm">
-                        AUTHENTICATE
+                        BELÉPÉS
                     </button>
                 </form>
             </div>
