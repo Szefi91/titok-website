@@ -83,7 +83,7 @@ export default function Hero() {
 
             {/* Content Container */}
             <div className="relative z-10 text-center px-4 max-w-6xl mx-auto flex flex-col items-center">
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading mb-4 text-white tracking-widest whitespace-normal md:whitespace-nowrap flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading mb-4 text-white tracking-widest whitespace-normal md:whitespace-nowrap flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 leading-tight">
                     <TypingText text="TITOK" speed={150} showCursor={false} />
                     <span className="text-accent">
                         <TypingText text="4. ÉVAD HAMAROSAN" speed={100} delay={1000} showCursor={true} />

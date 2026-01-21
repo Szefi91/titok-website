@@ -1,10 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import { useState } from "react";
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     return (
-        <header className="fixed top-0 left-0 w-full z-50 bg-[#050505]/80 backdrop-blur-sm border-b border-white/5">
+        <header className="fixed top-0 left-0 w-full z-[100] bg-[#050505]/80 backdrop-blur-sm border-b border-white/5">
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="text-2xl font-heading tracking-widest text-white hover:text-accent transition-colors duration-300">
