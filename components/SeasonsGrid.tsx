@@ -156,6 +156,11 @@ export default function SeasonsGrid() {
                 </div>
             </div>
 
+            {/* Large Watermark Text - Always Visible */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 font-heading text-[10rem] md:text-[15rem] leading-none pointer-events-none select-none z-0">
+                TITOK
+            </div>
+
             {/* Hidden Clues Layer for Seasons - Revealed by Flashlight */}
             <div
                 className="absolute inset-0 pointer-events-none z-20 transition-opacity duration-75"
@@ -171,7 +176,8 @@ export default function SeasonsGrid() {
                 <div ref={silkadeRef} className="absolute bottom-10 left-10 text-accent/60 font-serif italic text-2xl">
                     "silkade...."
                 </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 font-heading text-[15rem] leading-none opacity-20">
+                {/* Keep a higher opacity version inside the mask for "pop" effect */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/10 font-heading text-[10rem] md:text-[15rem] leading-none opacity-20">
                     TITOK
                 </div>
                 <div className="absolute top-2/3 right-1/4 text-white/10 font-mono text-sm opacity-30 transform rotate-12">

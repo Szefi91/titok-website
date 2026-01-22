@@ -65,7 +65,7 @@ export default function Shop() {
                     </p>
                     {showHint && (
                         <div className="mt-4 text-red-600 font-mono text-sm tracking-widest uppercase">
-                            <TypingText text="csak pötyögd be hogy T-I-T-O-K" speed={50} />
+                            <TypingText text="Jelszó: Titok" speed={50} />
                         </div>
                     )}
                 </div>

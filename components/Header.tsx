@@ -16,10 +16,12 @@ export default function Header() {
         localStorage.setItem("pageLoadCount", newCount.toString());
         setPageLoadCount(newCount);
 
-        if (newCount >= 5) {
+        if (newCount > 5) {
             setShowSecretBtn(true);
         }
     }, []);
+
+    if (!mounted) return null;
 
     return (
         <header className="fixed top-0 left-0 w-full z-[100] bg-[#050505]/95 backdrop-blur-sm border-b border-white/5">
@@ -40,19 +42,24 @@ export default function Header() {
                     <Link href="#patreon" className="text-[10px] md:text-sm uppercase tracking-wider text-muted hover:text-white transition-colors">
                         Patreon
                     </Link>
-                    <Link href="#shop" className="text-[10px] md:text-sm uppercase tracking-wider text-accent hover:text-white transition-colors font-bold">
-                        Shop
-                    </Link>
+                    <div className="flex items-center gap-2">
+                        <Link href="#shop" className="group flex items-center gap-1.5 text-[10px] md:text-sm uppercase tracking-wider text-accent hover:text-white transition-colors font-bold">
+                            Shop
+                            <span className="text-[7px] md:text-[9px] px-1 md:px-1.5 py-0.5 bg-accent/10 border border-accent/20 rounded text-accent font-normal normal-case animate-pulse hidden xs:inline">
+                                Hamarosan
+                            </span>
+                        </Link>
 
-                    {/* Secret Terminal Button - Only on mobile after 5 page loads */}
-                    {showSecretBtn && (
-                        <button
-                            onClick={() => window.dispatchEvent(new CustomEvent("open-secret-terminal"))}
-                            className="md:hidden text-[9px] font-mono text-red-500 border border-red-900/50 px-1.5 py-0.5 animate-pulse bg-red-900/10 uppercase"
-                        >
-                            KÓD
-                        </button>
-                    )}
+                        {/* Secret Terminal Button - Visble after 5 page loads */}
+                        {showSecretBtn && (
+                            <button
+                                onClick={() => window.dispatchEvent(new CustomEvent("open-secret-terminal"))}
+                                className="text-[8px] md:text-[10px] font-mono text-red-500 border border-red-900/50 px-1.5 py-0.5 md:px-2 md:py-1 animate-pulse bg-red-900/10 hover:bg-red-900/30 transition-colors uppercase"
+                            >
+                                CMD
+                            </button>
+                        )}
+                    </div>
                 </nav>
             </div>
         </header>

@@ -80,8 +80,66 @@ export default function GlobalSecrets() {
         }
     };
 
-    // 2. Ghost Scroll Logic
-    // ... (existing scroll logic unchanged)
+    // 2. Ghost Scroll Logic - Idle Triggered Multi-stage
+    useEffect(() => {
+        let ghostTimer1: NodeJS.Timeout;
+        let ghostTimer2: NodeJS.Timeout;
+        let ghostTimer3: NodeJS.Timeout;
+        let idleTimer: NodeJS.Timeout;
+
+        const clearAllTimers = () => {
+            clearTimeout(idleTimer);
+            clearTimeout(ghostTimer1);
+            clearTimeout(ghostTimer2);
+            clearTimeout(ghostTimer3);
+        };
+
+        const startGhostSequence = () => {
+            // Stage 1: Small jump (20s mark of being idle)
+            ghostTimer1 = setTimeout(() => {
+                window.scrollBy({ top: 400, behavior: 'smooth' });
+
+                // Stage 2: Medium jump (30s mark of being idle)
+                ghostTimer2 = setTimeout(() => {
+                    window.scrollBy({ top: 800, behavior: 'smooth' });
+
+                    // Stage 3: Final scroll (40s mark of being idle)
+                    ghostTimer3 = setTimeout(() => {
+                        const footer = document.querySelector('footer');
+                        if (footer) {
+                            footer.scrollIntoView({ behavior: 'smooth' });
+                            setTimeout(() => {
+                                window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
+                            }, 3000);
+                        }
+                    }, 10000);
+                }, 10000);
+            }, 0); // Trigger immediately after the 20s idle period starts this function
+        };
+
+        const resetIdleTimer = () => {
+            clearAllTimers();
+            idleTimer = setTimeout(() => {
+                startGhostSequence();
+            }, 20000); // 20s of total inactivity
+        };
+
+        // Listen for activity
+        const activities = ['mousemove', 'scroll', 'keydown', 'touchstart', 'click'];
+        activities.forEach(event => {
+            window.addEventListener(event, resetIdleTimer);
+        });
+
+        // Initial start
+        resetIdleTimer();
+
+        return () => {
+            activities.forEach(event => {
+                window.removeEventListener(event, resetIdleTimer);
+            });
+            clearAllTimers();
+        };
+    }, []);
 
     if (scareActive) return (
         // ... eye scare component
