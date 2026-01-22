@@ -91,30 +91,27 @@ export default function GlobalSecrets() {
             clearTimeout(idleTimer);
             clearTimeout(ghostTimer1);
             clearTimeout(ghostTimer2);
-            clearTimeout(ghostTimer3);
         };
 
         const startGhostSequence = () => {
-            // Stage 1: Small jump (20s mark of being idle)
+            // Stage 1: First jump at 20s
+            window.scrollBy({ top: 500, behavior: 'smooth' });
+
+            // Stage 2: Second jump after 10s (30s total)
             ghostTimer1 = setTimeout(() => {
-                window.scrollBy({ top: 400, behavior: 'smooth' });
+                window.scrollBy({ top: 800, behavior: 'smooth' });
 
-                // Stage 2: Medium jump (30s mark of being idle)
+                // Stage 3: Final scroll after 10s more (40s total)
                 ghostTimer2 = setTimeout(() => {
-                    window.scrollBy({ top: 800, behavior: 'smooth' });
-
-                    // Stage 3: Final scroll (40s mark of being idle)
-                    ghostTimer3 = setTimeout(() => {
-                        const footer = document.querySelector('footer');
-                        if (footer) {
-                            footer.scrollIntoView({ behavior: 'smooth' });
-                            setTimeout(() => {
-                                window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
-                            }, 3000);
-                        }
-                    }, 10000);
+                    const footer = document.querySelector('footer');
+                    if (footer) {
+                        footer.scrollIntoView({ behavior: 'smooth' });
+                        setTimeout(() => {
+                            window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
+                        }, 3000);
+                    }
                 }, 10000);
-            }, 0); // Trigger immediately after the 20s idle period starts this function
+            }, 10000);
         };
 
         const resetIdleTimer = () => {
