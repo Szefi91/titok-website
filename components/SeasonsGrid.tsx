@@ -156,10 +156,6 @@ export default function SeasonsGrid() {
                 </div>
             </div>
 
-            {/* Large Watermark Text - Always Visible */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 font-heading text-[10rem] md:text-[15rem] leading-none pointer-events-none select-none z-0">
-                TITOK
-            </div>
 
             {/* Hidden Clues Layer for Seasons - Revealed by Flashlight */}
             <div
