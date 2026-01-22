@@ -81,10 +81,10 @@ export default function GlobalSecrets() {
     };
 
     // 2. Ghost Scroll Logic - Idle Triggered Multi-stage
+    const isAutoScrolling = useRef(false);
     useEffect(() => {
         let ghostTimer1: NodeJS.Timeout;
         let ghostTimer2: NodeJS.Timeout;
-        let ghostTimer3: NodeJS.Timeout;
         let idleTimer: NodeJS.Timeout;
 
         const clearAllTimers = () => {
@@ -94,27 +94,42 @@ export default function GlobalSecrets() {
         };
 
         const startGhostSequence = () => {
-            // Stage 1: First jump at 20s
+            // Stage 1: First jump at 20s idle
+            isAutoScrolling.current = true;
             window.scrollBy({ top: 500, behavior: 'smooth' });
 
-            // Stage 2: Second jump after 10s (30s total)
-            ghostTimer1 = setTimeout(() => {
-                window.scrollBy({ top: 800, behavior: 'smooth' });
+            // Allow interactions to "take over" after a short delay (scroll duration)
+            setTimeout(() => { isAutoScrolling.current = false; }, 1000);
 
-                // Stage 3: Final scroll after 10s more (40s total)
+            // Stage 2: Second jump after 5s more (25s total)
+            ghostTimer1 = setTimeout(() => {
+                isAutoScrolling.current = true;
+                window.scrollBy({ top: 800, behavior: 'smooth' });
+                setTimeout(() => { isAutoScrolling.current = false; }, 1000);
+
+                // Stage 3: Final scroll after 5s more (30s total)
                 ghostTimer2 = setTimeout(() => {
                     const footer = document.querySelector('footer');
                     if (footer) {
-                        footer.scrollIntoView({ behavior: 'smooth' });
+                        isAutoScrolling.current = true;
+                        // Scroll to the absolute bottom
+                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
                         setTimeout(() => {
+                            isAutoScrolling.current = false;
                             window.dispatchEvent(new CustomEvent("ghost-scroll-complete"));
-                        }, 3000);
+                        }, 2000);
                     }
-                }, 10000);
-            }, 10000);
+                }, 5000);
+            }, 5000);
         };
 
-        const resetIdleTimer = () => {
+        const resetIdleTimer = (e?: Event) => {
+            // If it's a scroll event and we are auto-scrolling, ignore it
+            if (e?.type === 'scroll' && isAutoScrolling.current) return;
+
+            // Otherwise, any interaction (including manual scroll) resets everything
+            isAutoScrolling.current = false;
             clearAllTimers();
             idleTimer = setTimeout(() => {
                 startGhostSequence();
@@ -124,7 +139,7 @@ export default function GlobalSecrets() {
         // Listen for activity
         const activities = ['mousemove', 'scroll', 'keydown', 'touchstart', 'click'];
         activities.forEach(event => {
-            window.addEventListener(event, resetIdleTimer);
+            window.addEventListener(event, resetIdleTimer, { passive: true });
         });
 
         // Initial start
