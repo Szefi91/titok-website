@@ -8,23 +8,25 @@ export default function Hero() {
     const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
     const containerRef = useRef<HTMLElement>(null);
 
-    // Predifined positions for TEXT clues (mainly top/middle)
+    // Predifined positions for TEXT clues (Pushed to far edges, strictly below header)
     const textPositions = useMemo(() => [
-        { top: '15%', left: '10%' },
-        { top: '25%', right: '15%' },
-        { top: '45%', left: '8%' },
-        { top: '40%', right: '12%' },
-        { top: '15%', right: '35%' }
+        { top: '20%', left: '5%' },
+        { top: '22%', right: '5%' },
+        { top: '45%', left: '3%' },
+        { top: '48%', right: '3%' },
+        { top: '70%', left: '4%' },
+        { top: '72%', right: '4%' }
     ], []);
 
-    // Predifined positions for IMAGE clues (mainly bottom area / "láb rész")
+    // Predifined positions for IMAGE clues (Pushed to corners/bottom edges)
     const imagePositions = useMemo(() => [
-        { bottom: '15%', left: '10%' },
-        { bottom: '10%', right: '10%' },
-        { bottom: '20%', left: '40%' },
-        { bottom: '12%', right: '35%' }
+        { bottom: '10%', left: '5%' },
+        { bottom: '12%', right: '5%' },
+        { bottom: '25%', left: '3%' },
+        { bottom: '28%', right: '3%' },
+        { bottom: '5%', left: '15%' }, // Bottom-left-ish
+        { bottom: '5%', right: '15%' } // Bottom-right-ish
     ], []);
-
     // State for the chosen random positions
     const [cluePositions, setCluePositions] = useState<{ timestamp: any, binary: any, image1: any, image2: any } | null>(null);
 

@@ -9,6 +9,7 @@ interface TypingTextProps {
     delay?: number;
     onComplete?: () => void;
     showCursor?: boolean;
+    cursorColor?: string;
 }
 
 export default function TypingText({
@@ -17,7 +18,8 @@ export default function TypingText({
     speed = 100,
     delay = 0,
     onComplete,
-    showCursor = true
+    showCursor = true,
+    cursorColor = "bg-accent"
 }: TypingTextProps) {
     const [displayedText, setDisplayedText] = useState("");
     const [started, setStarted] = useState(false);
@@ -46,7 +48,7 @@ export default function TypingText({
         <span className={className}>
             {displayedText}
             {showCursor && (
-                <span className="animate-pulse inline-block w-[0.5em] h-[1em] bg-accent align-middle ml-1" />
+                <span className={`animate-pulse inline-block w-[0.5em] h-[1em] align-middle ml-1 ${cursorColor}`} />
             )}
         </span>
     );

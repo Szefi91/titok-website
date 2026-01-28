@@ -64,8 +64,9 @@ export default function Shop() {
                         &gt; AZ ADATOK TITKOSÍTÁS ALATT ÁLLNAK...
                     </p>
                     {showHint && (
-                        <div className="mt-4 text-red-600 font-mono text-sm tracking-widest uppercase">
-                            <TypingText text="Jelszó: Titok" speed={50} />
+                        <div className="mt-4 text-red-600 font-mono text-[9px] md:text-xs tracking-widest break-all max-w-2xl text-center leading-relaxed">
+                            <span className="block mb-2 text-xs font-bold uppercase">BIZTONSÁGI RENDSZER KÓD:</span>
+                            <TypingText text="4361737469656c3a20224e656d206c65737a656b2062656e6e652061207469746f6b206e6567796564696b20c3a9766164c3a162616e2e204d657274206d656768616c74616d2e22" speed={60} />
                         </div>
                     )}
                 </div>

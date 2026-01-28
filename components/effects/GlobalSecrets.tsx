@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import TypingText from "./TypingText";
 
 export default function GlobalSecrets() {
     const [showTerminal, setShowTerminal] = useState(false);
@@ -63,21 +64,73 @@ export default function GlobalSecrets() {
         };
     }, [showTerminal]);
 
+    const [isDecoding, setIsDecoding] = useState(false);
+    const [terminalLogs, setTerminalLogs] = useState<string[]>([]);
+    const [decodeResult, setDecodeResult] = useState<string | null>(null);
+
     // Handle Terminal Submit
-    const handleTerminalSubmit = (e: React.FormEvent) => {
+    const handleTerminalSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (mobileInput.toUpperCase() === "TITOK") {
-            // Visual feedback then scare
+        const input = mobileInput.trim();
+        if (!input) return;
+
+        // Legacy scare trigger
+        if (input.toUpperCase() === "TITOK") {
             setScareActive(true);
             setShowTerminal(false);
             setMobileInput("");
             setTimeout(() => setScareActive(false), 3500);
-        } else {
-            // Shake effect or error? Just clear for now
-            setMobileInput("");
-            // Maybe close or just blink red border... let's keep it simple
-            alert("HOZZÁFÉRÉS MEGTAGADVA");
+            return;
         }
+
+        // Decoder Logic
+        setIsDecoding(true);
+        setDecodeResult(null);
+        setTerminalLogs(["INITIATING DECODER V.4.0...", "SCANNING BITSTREAM..."]);
+
+        const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+        const runSimulation = async () => {
+            await sleep(800);
+
+            let format = "UNKNOWN";
+            // Check Binary first since any binary string is technically also a valid Hex string
+            if (/^[01\s]{8,}$/.test(input)) {
+                format = "BINARY";
+            } else if (/^[0-9A-Fa-f\s]{8,}$/.test(input)) {
+                format = "HEXADECIMAL";
+            }
+
+            setTerminalLogs(prev => [...prev, `FORMAT DETECTED: ${format}`]);
+            await sleep(600);
+            setTerminalLogs(prev => [...prev, "DECRYPTING RSA-4096..."]);
+            await sleep(1000);
+            setTerminalLogs(prev => [...prev, "ACCESSING DATA BLOCK..."]);
+            await sleep(800);
+
+            try {
+                let decoded = "";
+                if (format === "HEXADECIMAL") {
+                    const cleanHex = input.replace(/\s/g, '');
+                    const bytes = new Uint8Array(cleanHex.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16)));
+                    decoded = new TextDecoder().decode(bytes);
+                } else if (format === "BINARY") {
+                    const cleanBin = input.replace(/\s/g, '');
+                    const bytes = new Uint8Array(cleanBin.match(/.{8}/g)!.map(byte => parseInt(byte, 2)));
+                    decoded = new TextDecoder().decode(bytes);
+                } else {
+                    decoded = "HIBA: ÉRVÉNYTELEN ADATFORMÁTUM";
+                }
+
+                setTerminalLogs(prev => [...prev, "DECODING COMPLETE.", "---"]);
+                setDecodeResult(decoded);
+            } catch (err) {
+                setTerminalLogs(prev => [...prev, "CRITICAL ERROR: DATA CORRUPTION"]);
+            }
+            setIsDecoding(false);
+        };
+
+        runSimulation();
     };
 
     // 2. Ghost Scroll Logic - Idle Triggered Multi-stage
@@ -171,36 +224,73 @@ export default function GlobalSecrets() {
     );
 
     if (showTerminal) return (
-        <div className="fixed inset-0 z-[150] bg-black/95 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-300">
-            <div className="w-full max-w-md bg-black border border-green-900/50 p-6 font-mono relative shadow-[0_0_50px_rgba(0,255,0,0.1)]">
+        <div className="fixed inset-0 z-[150] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 md:p-4 animate-in fade-in duration-300">
+            <div className="w-full max-w-xl bg-black border border-green-900/50 p-4 md:p-6 font-mono relative shadow-[0_0_50px_rgba(0,255,0,0.1)] flex flex-col max-h-[90vh]">
                 <button
-                    onClick={() => setShowTerminal(false)}
-                    className="absolute top-2 right-4 text-green-900 hover:text-green-500"
+                    onClick={() => {
+                        setShowTerminal(false);
+                        setMobileInput("");
+                        setDecodeResult(null);
+                        setTerminalLogs([]);
+                    }}
+                    className="absolute top-3 right-3 text-green-900 hover:text-green-500 w-8 h-8 flex items-center justify-center z-10"
+                    aria-label="Close"
                 >
                     X
                 </button>
-                <div className="mb-8 text-green-800 text-xs tracking-widest uppercase">
-                    &gt; BIZTONSÁGI RENDSZER V.4.0 <br />
-                    &gt; JELSZÓ MEGADÁSA:
+                <div className="mb-4 text-green-800 text-[9px] md:text-[10px] tracking-widest uppercase border-b border-green-900/20 pb-2 pr-8">
+                    &gt; BIZTONSÁGI RENDSZER DEKODOLÓ V.4.0 <br />
+                    &gt; ÍRJA BE A KÓDOT:
                 </div>
-                <form onSubmit={handleTerminalSubmit} className="flex flex-col gap-4">
-                    <input
-                        ref={inputRef}
-                        type="text"
-                        value={mobileInput}
-                        onChange={(e) => setMobileInput(e.target.value)}
-                        className="bg-transparent border-b-2 border-green-900 text-green-500 font-bold text-2xl outline-none py-2 text-center uppercase placeholder-green-900/30 font-heading tracking-[0.5em]"
-                        placeholder="_____"
-                        autoComplete="off"
-                        maxLength={10}
-                    />
-                    <button type="submit" className="bg-green-900/20 border border-green-900 text-green-700 py-3 hover:bg-green-900/40 hover:text-green-400 transition-colors uppercase tracking-widest text-sm">
-                        BELÉPÉS
-                    </button>
-                </form>
+
+                <div className="terminal-scroll flex flex-col gap-4 overflow-y-auto pr-1">
+                    <form onSubmit={handleTerminalSubmit} className="flex flex-col gap-2">
+                        <textarea
+                            ref={inputRef as any}
+                            value={mobileInput}
+                            onChange={(e) => setMobileInput(e.target.value)}
+                            className="terminal-scroll bg-green-900/5 border border-green-900/30 text-green-500 font-mono text-xs md:text-sm outline-none p-3 w-full h-24 md:h-32 resize-none placeholder-green-900/20"
+                            placeholder="Szöveg beillesztése..."
+                            autoComplete="off"
+                            disabled={isDecoding}
+                        />
+                        <button
+                            type="submit"
+                            disabled={isDecoding}
+                            className={`py-3 md:py-4 border tracking-widest text-[10px] md:text-xs uppercase transition-all font-bold ${isDecoding
+                                    ? 'bg-green-900/10 border-green-900/20 text-green-900 cursor-not-allowed'
+                                    : 'bg-green-900/20 border-green-900 text-green-700 hover:bg-green-900/40 hover:text-green-400'
+                                }`}
+                        >
+                            {isDecoding ? 'FELDOLGOZÁS...' : 'DEKODOLÁS'}
+                        </button>
+                    </form>
+
+                    {/* Console Output */}
+                    {(terminalLogs.length > 0) && (
+                        <div className="bg-green-900/5 border border-green-900/20 p-3 md:p-4 font-mono">
+                            {terminalLogs.map((log, i) => (
+                                <div key={i} className="text-[9px] md:text-[10px] text-green-700 leading-relaxed">
+                                    <span className="opacity-40 mr-2">[{new Date().toLocaleTimeString(undefined, { hour12: false })}]</span>
+                                    {log}
+                                </div>
+                            ))}
+
+                            {decodeResult && (
+                                <div className="mt-4 p-3 bg-green-500/10 border border-green-500/30 animate-in zoom-in duration-300">
+                                    <div className="text-green-400 text-xs md:text-sm font-bold break-words whitespace-pre-wrap uppercase tracking-tighter flex flex-col sm:flex-row">
+                                        <span className="mr-2 shrink-0 opacity-70 font-mono text-[10px]">&gt; EREDMÉNY:</span>
+                                        <div className="mt-1 sm:mt-0">
+                                            {decodeResult && <TypingText text={decodeResult} speed={60} showCursor={true} cursorColor="bg-green-500" />}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );
-
     return null;
 }

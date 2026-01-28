@@ -82,3 +82,27 @@ h6 {
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+/* Custom Terminal Scrollbar */
+.terminal-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: #064e3b;
+  border: 1px solid #000000;
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* Firefox Support */
+.terminal-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #064e3b #000000;
+}

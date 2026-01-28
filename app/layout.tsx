@@ -37,10 +37,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hu">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-3063723181881847" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3063723181881847" crossOrigin="anonymous"></script>
+      </head>
+      {/* TE MEG MIT NÉZELŐDSZ ITT? */}
       <body
         className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6]`}
       >
-        {/* te meg mit nézelödsz itt? */}
         {children}
       </body>
     </html>
