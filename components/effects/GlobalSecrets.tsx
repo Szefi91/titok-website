@@ -24,7 +24,7 @@ export default function GlobalSecrets() {
             // If terminal is open, don't double count
             if (showTerminal) return;
 
-            if (e.key.length !== 1) return;
+            if (!e.key || e.key.length !== 1) return;
             inputBuffer.current = (inputBuffer.current + e.key.toUpperCase()).slice(-5);
 
             if (inputBuffer.current === "TITOK") {
@@ -112,11 +112,15 @@ export default function GlobalSecrets() {
                 let decoded = "";
                 if (format === "HEXADECIMAL") {
                     const cleanHex = input.replace(/\s/g, '');
-                    const bytes = new Uint8Array(cleanHex.match(/.{1,2}/g)!.map(byte => parseInt(byte, 16)));
+                    const matches = cleanHex.match(/.{1,2}/g);
+                    if (!matches) throw new Error("INVALID_HEX");
+                    const bytes = new Uint8Array(matches.map(byte => parseInt(byte, 16)));
                     decoded = new TextDecoder().decode(bytes);
                 } else if (format === "BINARY") {
                     const cleanBin = input.replace(/\s/g, '');
-                    const bytes = new Uint8Array(cleanBin.match(/.{8}/g)!.map(byte => parseInt(byte, 2)));
+                    const matches = cleanBin.match(/.{8}/g);
+                    if (!matches) throw new Error("INVALID_BINARY");
+                    const bytes = new Uint8Array(matches.map(byte => parseInt(byte, 2)));
                     decoded = new TextDecoder().decode(bytes);
                 } else {
                     decoded = "HIBA: ÉRVÉNYTELEN ADATFORMÁTUM";
@@ -258,8 +262,8 @@ export default function GlobalSecrets() {
                             type="submit"
                             disabled={isDecoding}
                             className={`py-3 md:py-4 border tracking-widest text-[10px] md:text-xs uppercase transition-all font-bold ${isDecoding
-                                    ? 'bg-green-900/10 border-green-900/20 text-green-900 cursor-not-allowed'
-                                    : 'bg-green-900/20 border-green-900 text-green-700 hover:bg-green-900/40 hover:text-green-400'
+                                ? 'bg-green-900/10 border-green-900/20 text-green-900 cursor-not-allowed'
+                                : 'bg-green-900/20 border-green-900 text-green-700 hover:bg-green-900/40 hover:text-green-400'
                                 }`}
                         >
                             {isDecoding ? 'FELDOLGOZÁS...' : 'DEKODOLÁS'}

@@ -19,7 +19,7 @@ export default function FlashlightEffect() {
             }
         };
 
-        // Flickering logic
+        const flickerTimeoutRef = { current: null as NodeJS.Timeout | null };
         const flicker = () => {
             const randomFlicker = Math.random();
 
@@ -42,19 +42,19 @@ export default function FlashlightEffect() {
             }
 
             // Schedule next potential flicker at sub-second intervals
-            setTimeout(flicker, 100 + Math.random() * 2000);
+            flickerTimeoutRef.current = setTimeout(flicker, 100 + Math.random() * 2000);
         };
 
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("touchstart", handleTouchMove, { passive: false });
         window.addEventListener("touchmove", handleTouchMove, { passive: false });
-        const flickerTimeout = setTimeout(flicker, 1000);
+        flickerTimeoutRef.current = setTimeout(flicker, 1000);
 
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("touchstart", handleTouchMove);
             window.removeEventListener("touchmove", handleTouchMove);
-            clearTimeout(flickerTimeout);
+            if (flickerTimeoutRef.current) clearTimeout(flickerTimeoutRef.current);
         };
     }, []);
 
