@@ -46,9 +46,11 @@ export default function Footer() {
 
                 <p className="text-white font-heading text-2xl tracking-widest mb-4">TITOK</p>
 
-                <p className="text-xs text-zinc-600">
-                    &copy; {new Date().getFullYear()} Minden jog fenntartva.
-                    <br />
+                <p className="text-[10px] text-zinc-600 flex flex-col items-center gap-2">
+                    <span>&copy; {new Date().getFullYear()} Minden jog fenntartva.</span>
+                    <a href="/adatkezeles" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800 tracking-widest uppercase">Adatkezelési Tájékoztató</a>
+                </p>
+                <p className="text-[10px] text-zinc-800 mt-4 opacity-50">
                     Az oldal cookie-kat használ (csak a rettegés fokozására).
                 </p>
             </div>

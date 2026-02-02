@@ -4,19 +4,26 @@ import { useState } from 'react';
 import { supabase } from '@/lib/supabase';
 
 export default function NewsletterSignup() {
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [agreed, setAgreed] = useState(false);
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!agreed) {
+            setStatus('error');
+            setMessage('Kérjük, fogadd el az adatkezelési tájékoztatót!');
+            return;
+        }
         setStatus('loading');
         setMessage('');
 
         try {
             const { error } = await supabase
                 .from('newsletter_subscribers')
-                .insert([{ email }]);
+                .insert([{ name, email }]);
 
             if (error) {
                 if (error.code === '23505') {
@@ -29,6 +36,7 @@ export default function NewsletterSignup() {
                 setStatus('success');
                 setMessage('Sikeres feliratkozás!');
                 setEmail('');
+                setName('');
             }
         } catch (err) {
             console.error('Newsletter error:', err);
@@ -74,6 +82,21 @@ export default function NewsletterSignup() {
                             <span className="text-xs">&gt;</span>
                         </div>
                         <input
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="FULL_NAME"
+                            required
+                            className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
+                            disabled={status === 'loading' || status === 'success'}
+                        />
+                    </div>
+
+                    <div className="relative group/input">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-red-900/50 group-focus-within/input:text-red-500 transition-colors">
+                            <span className="text-xs">&gt;</span>
+                        </div>
+                        <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -82,6 +105,15 @@ export default function NewsletterSignup() {
                             className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
                             disabled={status === 'loading' || status === 'success'}
                         />
+                    </div>
+
+                    <div className="flex items-start gap-3 py-2 group/check cursor-pointer" onClick={() => setAgreed(!agreed)}>
+                        <div className={`mt-0.5 w-4 h-4 border flex items-center justify-center transition-colors ${agreed ? 'bg-red-900/40 border-red-500' : 'bg-black border-white/10 ring-1 ring-white/5'}`}>
+                            {agreed && <div className="w-2 h-2 bg-white" />}
+                        </div>
+                        <p className="text-[10px] md:text-xs text-muted font-mono leading-tight">
+                            Elolvastam és elfogadom az <a href="/adatkezeles" className="text-red-800 hover:text-red-500 underline uppercase tracking-tighter" onClick={(e) => e.stopPropagation()}>Adatkezelési Tájékoztatót</a>.
+                        </p>
                     </div>
 
                     <button
