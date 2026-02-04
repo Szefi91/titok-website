@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "@/components/CookieConsent";
+import GlobalSecrets from "@/components/effects/GlobalSecrets";
+import VisibilityHandler from "@/components/effects/VisibilityHandler";
+import CrackEffect from "@/components/effects/CrackEffect";
+import FlashlightEffect from "@/components/effects/FlashlightEffect";
+import FloatingQuotes from "@/components/effects/FloatingQuotes";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -44,8 +49,13 @@ export default function RootLayout({
       </head>
       {/* TE MEG MIT NÉZELŐDSZ ITT? */}
       <body
-        className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6]`}
+        className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6] relative`}
       >
+        <VisibilityHandler />
+        <CrackEffect />
+        <FlashlightEffect />
+        <GlobalSecrets />
+        <FloatingQuotes />
         {children}
         <CookieConsent />
       </body>

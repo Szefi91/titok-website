@@ -42,6 +42,7 @@ export default function Footer() {
                 <div className="flex justify-center space-x-8 mb-8">
                     <a href="https://youtube.com/@Szefistudio" target="_blank" className="text-muted hover:text-white transition-colors">Szefistudio</a>
                     <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="text-muted hover:text-white transition-colors">Patreon</a>
+                    <a href="/kapcsolat" className="text-muted hover:text-white transition-colors">Kapcsolat</a>
                 </div>
 
                 <p className="text-white font-heading text-2xl tracking-widest mb-4">TITOK</p>
