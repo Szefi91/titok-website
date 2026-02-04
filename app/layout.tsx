@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Oswald } from "next/font/google";
 import "./globals.css";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -46,6 +47,7 @@ export default function RootLayout({
         className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6]`}
       >
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

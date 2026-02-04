@@ -150,7 +150,14 @@ export default function Hero() {
                         {/* Hidden Image 1: Kos ami kussol */}
                         <div className="absolute select-none opacity-40 grayscale" style={cluePositions.image1}>
                             <div className="relative w-24 h-24 md:w-56 md:h-56">
-                                <Image src="/kos_ami_kussol.png" alt="CLUE_1" fill className="object-contain" />
+                                <Image
+                                    src="/kos_ami_kussol.png"
+                                    alt="CLUE_1"
+                                    fill
+                                    sizes="(max-width: 768px) 96px, 224px"
+                                    priority
+                                    className="object-contain"
+                                />
                                 <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: KOS_AMI_KUSSOL.PNG</p>
                             </div>
                         </div>
@@ -158,7 +165,13 @@ export default function Hero() {
                         {/* Hidden Image 2: Maszk */}
                         <div className="absolute select-none opacity-40 grayscale" style={cluePositions.image2}>
                             <div className="relative w-24 h-24 md:w-56 md:h-56">
-                                <Image src="/maszk.png" alt="CLUE_2" fill className="object-contain" />
+                                <Image
+                                    src="/maszk.png"
+                                    alt="CLUE_2"
+                                    fill
+                                    sizes="(max-width: 768px) 96px, 224px"
+                                    className="object-contain"
+                                />
                                 <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: MASZK.PNG</p>
                             </div>
                         </div>

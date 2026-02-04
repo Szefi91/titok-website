@@ -64,7 +64,13 @@ export default function Footer() {
                 }}
             >
                 <div className="absolute top-1/2 left-10 md:left-40 -translate-y-1/2 opacity-30 grayscale w-32 h-32">
-                    <Image src="/maszk.png" alt="HIDDEN_MASK" fill className="object-contain" />
+                    <Image
+                        src="/maszk.png"
+                        alt="HIDDEN_MASK"
+                        fill
+                        sizes="128px"
+                        className="object-contain"
+                    />
                 </div>
 
                 <div className="absolute top-1/2 right-10 md:right-40 -translate-y-1/2 text-white/10 font-mono text-[10px] text-right hidden lg:block">

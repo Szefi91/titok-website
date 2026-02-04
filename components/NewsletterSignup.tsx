@@ -1,14 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { useState, useEffect } from 'react';
+import { subscribeAction } from '@/app/actions/newsletter';
 
 export default function NewsletterSignup() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [agreed, setAgreed] = useState(false);
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error' | 'already_subscribed'>('idle');
     const [message, setMessage] = useState('');
+
+    useEffect(() => {
+        // Only check for localStorage if we are NOT in development
+        if (process.env.NODE_ENV !== 'development') {
+            const isSubscribed = localStorage.getItem('titok_subscribed');
+            if (isSubscribed) {
+                setStatus('already_subscribed');
+            }
+        }
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -21,23 +31,19 @@ export default function NewsletterSignup() {
         setMessage('');
 
         try {
-            const { error } = await supabase
-                .from('newsletter_subscribers')
-                .insert([{ name, email }]);
+            const result = await subscribeAction({ name, email });
 
-            if (error) {
-                if (error.code === '23505') {
-                    setStatus('error');
-                    setMessage('Ez az email cím már fel van iratkozva!');
-                } else {
-                    throw error;
-                }
-            } else {
-                setStatus('success');
-                setMessage('Sikeres feliratkozás!');
-                setEmail('');
-                setName('');
+            if (result.error) {
+                setStatus('error');
+                setMessage(result.error);
+                return;
             }
+
+            setStatus('success');
+            setMessage('Sikeres feliratkozás! Ellenőrizd a fiókodat az üdvözlő üzenetért.');
+            setEmail('');
+            setName('');
+            localStorage.setItem('titok_subscribed', 'true');
         } catch (err) {
             console.error('Newsletter error:', err);
             setStatus('error');
@@ -45,18 +51,26 @@ export default function NewsletterSignup() {
         }
     };
 
+    if (status === 'already_subscribed' && process.env.NODE_ENV !== 'development') {
+        return (
+            <div className="w-full max-w-lg mx-auto p-8 bg-black/40 backdrop-blur-md border border-green-900/20 text-center animate-in fade-in duration-500 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-green-900/5 blur-3xl rounded-full -mr-16 -mt-16 pointer-events-none" />
+
+                <div className="relative z-10 py-4">
+                    <div className="w-16 h-16 bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/30 group-hover:scale-110 transition-transform duration-500 shadow-[0_0_20px_rgba(34,197,94,0.1)]">
+                        <span className="text-green-500 text-2xl">✓</span>
+                    </div>
+                    <h3 className="text-2xl font-heading text-white mb-3 tracking-[0.3em] uppercase">MÁR FELIRATKOZTÁL</h3>
+                    <p className="text-muted font-mono text-xs md:text-sm opacity-70 leading-relaxed px-4">
+                        &gt; Köszönjük a bizalmadat. Hamarosan jelentkezünk a legfrissebb <span className="text-green-500/80">TITKOKKAL</span>.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="w-full max-w-lg mx-auto p-6 md:p-8 bg-black/40 backdrop-blur-md border border-white/5 hover:border-red-900/40 transition-colors duration-500 shadow-2xl relative overflow-hidden group">
-            <style jsx>{`
-                input:-webkit-autofill,
-                input:-webkit-autofill:hover, 
-                input:-webkit-autofill:focus {
-                    -webkit-text-fill-color: white !important;
-                    -webkit-box-shadow: 0 0 0px 1000px #0a0a0a inset !important;
-                    transition: background-color 5000s ease-in-out 0s;
-                }
-            `}</style>
-            {/* Background Accent */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-red-900/5 blur-3xl rounded-full -mr-16 -mt-16 pointer-events-none" />
 
             <div className="relative z-10">
@@ -71,7 +85,7 @@ export default function NewsletterSignup() {
                     </p>
                     <div className="p-3 bg-red-900/5 border-l-2 border-red-900/30 italic">
                         <p>
-                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">CASTING</span> lehetőségekről is, ha szeretnél közvetlenül is részt venni a történetben.
+                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">CASTING</span> lehetőségekről is.
                         </p>
                     </div>
                 </div>
@@ -88,7 +102,7 @@ export default function NewsletterSignup() {
                             placeholder="FULL_NAME"
                             required
                             className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
-                            disabled={status === 'loading' || status === 'success'}
+                            disabled={status === 'loading'}
                         />
                     </div>
 
@@ -103,7 +117,7 @@ export default function NewsletterSignup() {
                             placeholder="EMAIL_ADDRESS"
                             required
                             className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
-                            disabled={status === 'loading' || status === 'success'}
+                            disabled={status === 'loading'}
                         />
                     </div>
 
@@ -118,7 +132,7 @@ export default function NewsletterSignup() {
 
                     <button
                         type="submit"
-                        disabled={status === 'loading' || status === 'success'}
+                        disabled={status === 'loading'}
                         className="w-full py-4 px-6 border border-red-900/40 bg-red-900/10 text-red-700 font-heading tracking-[0.3em] hover:bg-red-900/30 hover:text-red-500 hover:border-red-600 transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed uppercase group/btn overflow-hidden relative"
                     >
                         <span className="relative z-10">
