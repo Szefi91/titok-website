@@ -191,6 +191,8 @@ export async function subscribeAction(formData: { name: string; email: string })
                                     <div class="list-item"><span class="bullet">></span> Friss állapotjelentések a projektről</div>
                                     <div class="list-item"><span class="bullet">></span> Interaktív közösségi feladványok</div>
                                     <div class="list-item"><span class="bullet">></span> <span class="accent-text">CASTING</span> és részvételi felhívások</div>
+                                    <div class="list-item"><span class="bullet">></span> Webshoppal kapcsolatos információk</div>
+                                    <div class="list-item"><span class="bullet">></span> <span class="accent-text">EXCLUSIVE</span> discountok</div>
                                 </div>
                                 
                                 <p style="text-align: center; margin-top: 40px; font-size: 12px; opacity: 0.7;">JELENTKEZÜNK MÉG..</p>
