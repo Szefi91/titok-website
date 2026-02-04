@@ -19,6 +19,7 @@ const oswald = Oswald({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://titoksorozat.hu"),
   title: "TITOK - Horror Sorozat | 4. Évad",
   description: "A TITOK horror sorozat hivatalos oldala. 4. évad hamarosan. Nézd vissza az előző évadokat, és csatlakozz a rejtélyhez.",
   openGraph: {
