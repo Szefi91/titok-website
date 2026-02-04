@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import TypingText from "./TypingText";
+import { usePathname } from "next/navigation";
 
 export default function GlobalSecrets() {
     const [showTerminal, setShowTerminal] = useState(false);
     const [mobileInput, setMobileInput] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
+    const pathname = usePathname();
 
     const [scareActive, setScareActive] = useState(false);
     const [isIdle, setIsIdle] = useState(false);
@@ -140,6 +142,9 @@ export default function GlobalSecrets() {
     // 2. Ghost Scroll Logic - Idle Triggered Multi-stage
     const isAutoScrolling = useRef(false);
     useEffect(() => {
+        // ONLY active on the homepage
+        if (pathname !== '/') return;
+
         let ghostTimer1: NodeJS.Timeout;
         let ghostTimer2: NodeJS.Timeout;
         let idleTimer: NodeJS.Timeout;
