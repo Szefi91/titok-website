@@ -28,11 +28,20 @@ export const metadata: Metadata = {
     siteName: "TITOK",
     locale: "hu_HU",
     type: "website",
+    images: [
+      {
+        url: "/og-main.png",
+        width: 1200,
+        height: 630,
+        alt: "TITOK 4. ÉVAD HAMAROSAN",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "TITOK - Horror Sorozat | 4. Évad",
     description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről",
+    images: ["/og-main.png"],
   },
 };
 
