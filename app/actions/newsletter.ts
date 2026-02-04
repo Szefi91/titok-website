@@ -24,6 +24,7 @@ export async function subscribeAction(formData: { name: string; email: string })
     console.log('--- SUBSCRIBE ATTEMPT ---');
     console.log('Name:', name);
     console.log('Email:', email);
+    console.log('SMTP Config:', process.env.SMTP_HOST, 'Port:', process.env.SMTP_PORT);
 
     if (!name || !email) {
         console.error('Validation failed: Missing name or email');
@@ -110,13 +111,20 @@ export async function subscribeAction(formData: { name: string; email: string })
                         .header { text-align: center; margin-bottom: 50px; }
                         .logo { 
                             font-family: 'Oswald', sans-serif;
-                            font-size: 48px; 
-                            letter-spacing: 20px; 
+                            font-size: 40px; 
+                            letter-spacing: 15px; 
                             color: #E6E6E6; 
                             font-weight: 200; 
                             text-transform: uppercase;
                             margin: 0;
-                            padding-left: 20px; 
+                            padding-left: 15px;
+                            white-space: nowrap;
+                            display: inline-block;
+                        }
+                        @media only screen and (max-width: 480px) {
+                            .logo { font-size: 28px !important; letter-spacing: 8px !important; padding-left: 8px !important; }
+                            .container { padding: 40px 30px !important; }
+                            .welcome-text { font-size: 16px !important; }
                         }
                         .divider { 
                             width: 30px; 
@@ -177,7 +185,7 @@ export async function subscribeAction(formData: { name: string; email: string })
                             <div class="welcome-text">ÜDVÖZLÜNK, ${name.toUpperCase()}</div>
                             
                             <div class="content">
-                                <p>A valóság néha repedezik. Te pedig mostantól az elsők között látod meg, mi van mögötte.</p>
+                                <p>A valóság néha megreped, és te mostantól az elsők között tekinthetsz át a réseken..</p>
                                 
                                 <div class="list-section">
                                     <div class="list-item"><span class="bullet">></span> Friss állapotjelentések a projektről</div>
