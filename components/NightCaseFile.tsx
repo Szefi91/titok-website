@@ -10,7 +10,11 @@ function isNightHour(hour: number) {
   return hour >= NIGHT_START_HOUR || hour < NIGHT_END_HOUR;
 }
 
-export default function NightCaseFile() {
+type NightCaseFileProps = {
+  forceOpen?: boolean;
+};
+
+export default function NightCaseFile({ forceOpen = false }: NightCaseFileProps) {
   const [hour, setHour] = useState<number | null>(null);
   const [slide, setSlide] = useState(0);
 
@@ -22,6 +26,7 @@ export default function NightCaseFile() {
   }, []);
 
   const isNight = hour !== null && isNightHour(hour);
+  const isUnlocked = forceOpen || isNight;
 
   const slides = useMemo(
     () => [
@@ -45,12 +50,12 @@ export default function NightCaseFile() {
   );
 
   useEffect(() => {
-    if (!isNight) return;
+    if (!isUnlocked) return;
     const id = window.setInterval(() => {
       setSlide((prev) => (prev + 1) % slides.length);
     }, 4500);
     return () => window.clearInterval(id);
-  }, [isNight, slides.length]);
+  }, [isUnlocked, slides.length]);
 
   if (hour === null) return null;
 
@@ -66,7 +71,7 @@ export default function NightCaseFile() {
           </p>
         </div>
 
-        {!isNight ? (
+        {!isUnlocked ? (
           <div className="border border-white/10 bg-[#050505] p-8 text-center">
             <p className="font-mono text-red-900/70 tracking-[0.2em] text-xs md:text-sm">
               AKTA ZÁROLVA // IDŐABLAKON KÍVÜL

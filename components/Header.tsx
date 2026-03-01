@@ -58,6 +58,13 @@ export default function Header() {
                     </Link>
 
                     <Link
+                        href="/aktak"
+                        className={`text-[10px] md:text-sm uppercase tracking-wider transition-colors ${pathname === '/aktak' ? 'text-white' : 'text-muted hover:text-white'}`}
+                    >
+                        Akták
+                    </Link>
+
+                    <Link
                         href="/kapcsolat"
                         className={`text-[10px] md:text-sm uppercase tracking-wider transition-colors ${pathname === '/kapcsolat' ? 'text-white' : 'text-muted hover:text-white'}`}
                     >
