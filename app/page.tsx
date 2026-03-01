@@ -7,6 +7,7 @@ import PatreonCTA from "@/components/PatreonCTA";
 import Shop from "@/components/Shop";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import Footer from "@/components/Footer";
+import NightCaseFile from "@/components/NightCaseFile";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <SeasonsGrid />
       <PatreonCTA />
       <Shop />
+      <NightCaseFile />
       <section className="py-20 px-4">
         <NewsletterSignup />
       </section>
