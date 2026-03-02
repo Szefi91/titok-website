@@ -18,14 +18,30 @@ const oswald = Oswald({
   subsets: ["latin"],
 });
 
+const siteUrl = "https://titoksorozat.hu";
+const siteTitle = "TITOK - Horror Sorozat | 4. Évad";
+const siteDescription =
+  "A TITOK horror sorozat hivatalos oldala. 4. évad hamarosan. Nézd vissza az előző évadokat, és csatlakozz a rejtélyhez.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://titoksorozat.hu"),
-  title: "TITOK - Horror Sorozat | 4. Évad",
-  description: "A TITOK horror sorozat hivatalos oldala. 4. évad hamarosan. Nézd vissza az előző évadokat, és csatlakozz a rejtélyhez.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  applicationName: "TITOK",
+  alternates: {
+    canonical: "/",
+  },
+  keywords: [
+    "Titok sorozat",
+    "magyar horror sorozat",
+    "Titok 4. évad",
+    "ARG horror",
+    "found footage",
+  ],
   openGraph: {
-    title: "TITOK - Horror Sorozat | 4. Évad",
-    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről",
-    url: "https://titoksorozat.hu",
+    title: siteTitle,
+    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről.",
+    url: siteUrl,
     siteName: "TITOK",
     locale: "hu_HU",
     type: "website",
@@ -40,9 +56,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TITOK - Horror Sorozat | 4. Évad",
-    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről",
+    title: siteTitle,
+    description: "A hivatalos oldal, ahol megtalálsz mindent az eddigi és készülő projektről.",
     images: ["/og-main.png"],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
@@ -55,12 +74,13 @@ export default function RootLayout({
     <html lang="hu">
       <head>
         <meta name="google-adsense-account" content="ca-pub-3063723181881847" />
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3063723181881847" crossOrigin="anonymous"></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3063723181881847"
+          crossOrigin="anonymous"
+        ></script>
       </head>
-      {/* TE MEG MIT NÉZELŐDSZ ITT? */}
-      <body
-        className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6] relative`}
-      >
+      <body className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6] relative`}>
         <VisibilityHandler />
         <CrackEffect />
         <FlashlightEffect />
