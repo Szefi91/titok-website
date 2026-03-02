@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "TITOK - Horror Sorozat | Hivatalos Oldal",
   description:
-    "A TITOK hivatalos oldala: epizódok, háttértartalmak, AKTÁK, hírek és 4. évad frissítések egy helyen.",
+    "A TITOK hivatalos oldala: epizódok, háttértartalmak, hírek és 4. évad frissítések egy helyen.",
   alternates: {
     canonical: "/",
   },
@@ -46,20 +46,6 @@ export default function Home() {
       <SeasonsGrid />
       <PatreonCTA />
       <Shop />
-
-      <section className="px-4 py-10">
-        <div className="max-w-5xl mx-auto border border-white/10 bg-black/30 p-6 md:p-8">
-          <h2 className="text-xl md:text-2xl font-heading tracking-[0.08em] text-white mb-4">Mi a TITOK sorozat?</h2>
-          <p className="text-zinc-300 leading-relaxed">
-            A TITOK egy magyar horror sorozat, amely found-footage és ARG elemeket használ. A történet évadokon át
-            épül, visszatérő karakterekkel, rejtett nyomokkal és közösségi megfejtésekkel.
-          </p>
-          <p className="text-zinc-400 leading-relaxed mt-3">
-            Az oldalon epizódok, háttéranyagok, AKTÁK, hírek és 4. évad frissítések találhatók. Ha szereted a sötét,
-            nyomozós, rejtélyes univerzumokat, itt jó helyen vagy.
-          </p>
-        </div>
-      </section>
 
       <section className="py-20 px-4">
         <NewsletterSignup />
