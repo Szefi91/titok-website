@@ -85,7 +85,7 @@ export default function NewsletterSignup() {
                     </p>
                     <div className="p-3 bg-red-900/5 border-l-2 border-red-900/30 italic">
                         <p>
-                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">SZEREPLŐVÁLOGATÁS</span> lehetőségekről is.
+                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">CASTING</span> lehetőségekről is.
                         </p>
                     </div>
                 </div>

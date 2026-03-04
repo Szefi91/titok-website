@@ -71,7 +71,7 @@ export default function Header() {
                             onClick={() => window.dispatchEvent(new CustomEvent("open-secret-terminal"))}
                             className="text-[8px] md:text-[10px] font-mono text-red-500 border border-red-900/50 px-1.5 py-0.5 md:px-2 md:py-1 animate-pulse bg-red-900/10 hover:bg-red-900/30 transition-colors uppercase"
                         >
-PAR
+CMD
                         </button>
                     )}
                 </nav>

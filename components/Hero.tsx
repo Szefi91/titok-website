@@ -158,7 +158,7 @@ export default function Hero() {
                                     priority
                                     className="object-contain"
                                 />
-                                <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">AKTAFÁJL: KOS_AMI_KUSSOL.PNG</p>
+                                <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: KOS_AMI_KUSSOL.PNG</p>
                             </div>
                         </div>
 
@@ -172,7 +172,7 @@ export default function Hero() {
                                     sizes="(max-width: 768px) 96px, 224px"
                                     className="object-contain"
                                 />
-                                <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">AKTAFÁJL: MASZK.PNG</p>
+                                <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: MASZK.PNG</p>
                             </div>
                         </div>
                     </>

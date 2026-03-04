@@ -46,7 +46,7 @@ export default function Shop() {
                             </div>
 
                             <div className="relative z-0 group-hover:blur-md transition-all duration-500">
-                                <p className="text-accent text-xs font-mono mb-2">AZON: 00{item.id}_HIBA</p>
+                                <p className="text-accent text-xs font-mono mb-2">ID: 00{item.id}_ERR</p>
                                 <h3 className="text-white font-heading text-2xl md:text-3xl mb-6 leading-tight underline decoration-red-900/30 underline-offset-8 decoration-1">{item.name}</h3>
                                 <div className="flex justify-between items-center pt-6 border-t border-white/5">
                                     <span className="text-muted text-sm font-mono">{item.price}</span>
