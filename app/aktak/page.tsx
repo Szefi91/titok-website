@@ -17,7 +17,7 @@ export default function AktakPage() {
     setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
   };
 
-  const isWindowOpen = isAktaTimeWindow();
+  const isWindowOpen = process.env.NODE_ENV === "development" || isAktaTimeWindow();
 
   return (
     <main className="min-h-screen bg-[#050505] cursor-none-custom">
