@@ -97,6 +97,11 @@ export default function A017Page() {
                 azonosítható forrás, ennek ellenére 23:2<One>1</One>, 23:3<One>1</One> és 23:4<One>1</One> időbélyeggel további rezonanciák kerültek a logba.
                 Az utolsó rendszerbejegyzés 00:0<Zero>0</Zero>, ezt követően a csengő néma maradt; az ügy vizsgálata folyamatban van.
               </p>
+
+              <p className="mt-5 leading-relaxed font-mono text-[14px] text-zinc-400 uppercase tracking-[0.16em]">
+                Kiemelt mintasor:
+                <span className="ml-2"><Zero>0</Zero><Zero>0</Zero><One>1</One><One>1</One><Zero>0</Zero><One>1</One><One>1</One><Zero>0</Zero><Zero>0</Zero><Zero>0</Zero><One>1</One><Zero>0</Zero><One>1</One><One>1</One><One>1</One><Zero>0</Zero></span>
+              </p>
             </article>
 
             <aside className="space-y-5">
