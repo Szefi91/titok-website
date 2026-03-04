@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { AKTA_ENABLED } from "@/lib/features";
 
 export default function Footer() {
     const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
@@ -43,6 +44,9 @@ export default function Footer() {
                     <a href="https://youtube.com/@Szefistudio" target="_blank" className="text-muted hover:text-white transition-colors">Szefistudio</a>
                     <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="text-muted hover:text-white transition-colors">Patreon</a>
                     <a href="/kapcsolat" className="text-muted hover:text-white transition-colors">Kapcsolat</a>
+                    {AKTA_ENABLED && (
+                        <a href="/aktak" className="text-muted hover:text-white transition-colors">Akták</a>
+                    )}
                 </div>
 
                 <p className="text-white font-heading text-2xl tracking-widest mb-4">TITOK</p>
