@@ -80,24 +80,22 @@ export default function A017Page() {
               <h2 className="font-heading text-2xl tracking-[0.08em] text-white">Jegyzőkönyvi kivonat – B-01 szektor</h2>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
-                A tárgy begyűjtése Budapest XVIII. kerületében történt. A helyszínre érkező egységet a B-<Zero>0</Zero><Zero>0</Zero> jelű riasztás indította el,
-                amely egy régi társasház egyik lakásából futott be. A beérkező csapat szerint az eset <One>1</One>-es szintű kivizsgálást igényelt.
-                A lakás az épület <One>1</One>. emeletén, a folyosó végén volt; az ajtó zárva volt, és behatolásra utaló nyomot <Zero>0</Zero> alkalommal rögzítettek.
+                A tárgy begyűjtése Budapest XVIII. kerületében történt. A helyszínre érkező egységet a B-<Zero>0</Zero><Zero>0</Zero> jelű riasztás indította,
+                az esetet pedig <One>1</One>-es szintű kivizsgálásra sorolták. A lakás az épület <One>1</One>. emeletén volt,
+                az ajtón külső behatolásra utaló nyomot <Zero>0</Zero> ponton rögzítettek.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
-                Bent egy férfi holttestét találták a nappali közepén, a halál idejét körülbelül <One>1</One> napra becsülték.
-                A test mellett fekvő kézi csengőt <One>1</One> technikai egység vizsgálta meg első körben.
-                A szerkezet ép volt, külsérelmi nyomot <Zero>0</Zero> ponton találtak, nappali mérésben pedig
-                <Zero>0</Zero> anomália jelent meg. Az első eltérés csak <Zero>0</Zero>:00-kor jelentkezett: a csengő mozdulatlan maradt,
-                mégis <One>1</One> különálló hangimpulzus bekerült a felvételbe.
+                Bent egy férfi holttestét találták a nappali közepén, a halál idejét kb. <One>1</One> napra becsülték.
+                A csengőt a helyszínen <One>1</One> technikai egység vizsgálta át, szerkezeti sérülést nem találtak.
+                Nappali üzemmódban az eltéréskód <Zero>0</Zero> maradt, majd az éjszakai megfigyelési naplóban 22:3<Zero>0</Zero>-nál
+                és 23:0<Zero>0</Zero>-nál is esemény nélküli bejegyzés szerepelt.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
-                A következő vizsgálati ciklusban a szenzorok <Zero>0</Zero> azonosítható forrást mutattak a helyiségben,
-                ennek ellenére <One>1</One>, majd <One>1</One> egymást követő rezonanciát rögzítettek.
-                Az utolsó bejegyzett esemény <One>1</One> rövid hang volt, amely után a rendszer <Zero>0</Zero> állapotkódra váltva leállt.
-                A csengő azóta sem szólalt meg; az eset vizsgálata továbbra is folyamatban van.
+                Az első tényleges hangimpulzust 23:0<One>1</One>-kor rögzítették. A 23:1<Zero>0</Zero>-es kontrollmérésben továbbra sem volt
+                azonosítható forrás, ennek ellenére 23:2<One>1</One>, 23:3<One>1</One> és 23:4<One>1</One> időbélyeggel további rezonanciák kerültek a logba.
+                Az utolsó rendszerbejegyzés 00:0<Zero>0</Zero>, ezt követően a csengő néma maradt; az ügy vizsgálata folyamatban van.
               </p>
             </article>
 
