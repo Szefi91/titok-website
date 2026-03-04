@@ -22,7 +22,7 @@ export default function Shop() {
         <section id="shop" className="py-24 px-4 bg-[#080808] border-y border-white/5">
             <div className="container mx-auto max-w-5xl">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-heading text-white mb-4 tracking-widest text-shadow-glow">BOLT</h2>
+                    <h2 className="text-4xl md:text-5xl font-heading text-white mb-4 tracking-widest text-shadow-glow">SHOP</h2>
                     <div className="inline-block px-4 py-1 bg-accent/10 border border-accent/20 text-accent text-xs tracking-[0.3em] font-bold uppercase">
                         Hamarosan Nyit
                     </div>

@@ -51,7 +51,7 @@ export default function Header() {
                     </Link>
 
                     <Link href={getPath("#shop")} className="group flex items-center gap-1.5 text-[10px] md:text-sm uppercase tracking-wider text-accent hover:text-white transition-colors font-bold">
-                        Bolt
+                        Shop
                         <span className="text-[7px] md:text-[9px] px-1 md:px-1.5 py-0.5 bg-accent/10 border border-accent/20 rounded text-accent font-normal normal-case animate-pulse hidden xs:inline">
                             Hamarosan
                         </span>
