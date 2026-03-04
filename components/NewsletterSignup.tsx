@@ -85,7 +85,7 @@ export default function NewsletterSignup() {
                     </p>
                     <div className="p-3 bg-red-900/5 border-l-2 border-red-900/30 italic">
                         <p>
-                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">CASTING</span> lehetőségekről is.
+                            &gt; Itt értesítünk majd a <span className="font-bold text-white">közösségi felhívásokról</span> és az esetleges <span className="font-bold text-white">SZEREPLŐVÁLOGATÁS</span> lehetőségekről is.
                         </p>
                     </div>
                 </div>
@@ -99,7 +99,7 @@ export default function NewsletterSignup() {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="FULL_NAME"
+                            placeholder="TELJES_NÉV"
                             required
                             className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
                             disabled={status === 'loading'}
@@ -114,7 +114,7 @@ export default function NewsletterSignup() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder="EMAIL_ADDRESS"
+                            placeholder="EMAIL_CÍM"
                             required
                             className="w-full pl-8 pr-4 py-3 bg-black/60 border border-white/10 text-white placeholder-white/20 font-mono text-sm outline-none focus:border-red-900/50 transition-all duration-300"
                             disabled={status === 'loading'}

@@ -21,19 +21,19 @@ export default function PatreonCTA() {
                             <div className="w-3 h-3 rounded-full bg-green-500"></div>
                             <h3 className="text-xl font-heading text-white">TIER 1 – „Támogató”</h3>
                         </div>
-                        <p className="text-2xl font-bold text-white mb-1">$6.50 <span className="text-sm font-normal text-muted">/ month (+VAT)</span></p>
+                        <p className="text-2xl font-bold text-white mb-1">$6.50 <span className="text-sm font-normal text-muted">/ hó (+ÁFA)</span></p>
                         <p className="text-sm text-gray-400 mb-6 italic">Ez az alap, stabil réteg.</p>
 
                         <div className="space-y-3 text-sm text-gray-300 mb-6 flex-grow">
                             <p><strong className="text-white">Mit kap:</strong></p>
                             <ul className="list-disc list-inside space-y-1 pl-1">
-                                <li>Patreon-only képek (hangulatképek, backstage)</li>
+                                <li>Patreon-exkluzív képek (hangulatképek, kulisszák mögött)</li>
                                 <li>Szavazásokban részvétel</li>
                                 <li>Korai értesítés, mikor jön új rész</li>
-                                <li>Patreon-only posztok (rövid gondolatok)</li>
+                                <li>Patreon-exkluzív posztok (rövid gondolatok)</li>
                             </ul>
                         </div>
-                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-white/10 hover:bg-white/20 text-white text-center font-heading uppercase transition-colors rounded">Join</a>
+                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-white/10 hover:bg-white/20 text-white text-center font-heading uppercase transition-colors rounded">Csatlakozás</a>
                     </div>
 
                     {/* Tier 2 - Bennfentes */}
@@ -45,7 +45,7 @@ export default function PatreonCTA() {
                             <div className="w-3 h-3 rounded-full bg-blue-500"></div>
                             <h3 className="text-xl font-heading text-white">TIER 2 – „Bennfentes”</h3>
                         </div>
-                        <p className="text-2xl font-bold text-white mb-1">$11 <span className="text-sm font-normal text-muted">/ month (+VAT)</span></p>
+                        <p className="text-2xl font-bold text-white mb-1">$11 <span className="text-sm font-normal text-muted">/ hó (+ÁFA)</span></p>
                         <p className="text-sm text-gray-400 mb-6 italic">Látnod kell, amit más nem láthat!</p>
 
                         <div className="space-y-3 text-sm text-gray-300 mb-6 flex-grow">
@@ -54,11 +54,11 @@ export default function PatreonCTA() {
                                 <li><strong className="text-white">Minden az előzőből</strong></li>
                                 <li>Epizódok <strong className="text-white">24-48 órával hamarabb</strong></li>
                                 <li>Extra képek / snittek, amik máshol nem jelennek meg</li>
-                                <li>Patreon-only magyarázós posztok</li>
+                                <li>Patreon-exkluzív magyarázós posztok</li>
                                 <li>Szavazásoknál <strong className="text-white">nagyobb súly</strong></li>
                             </ul>
                         </div>
-                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white text-center font-heading uppercase transition-colors rounded shadow-lg shadow-blue-900/20">Join</a>
+                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white text-center font-heading uppercase transition-colors rounded shadow-lg shadow-blue-900/20">Csatlakozás</a>
                     </div>
 
                     {/* Tier 3 - Kredites */}
@@ -67,7 +67,7 @@ export default function PatreonCTA() {
                             <div className="w-3 h-3 rounded-full bg-purple-500"></div>
                             <h3 className="text-xl font-heading text-white">TIER 3 – „Kredites”</h3>
                         </div>
-                        <p className="text-2xl font-bold text-white mb-1">$16 <span className="text-sm font-normal text-muted">/ month (+VAT)</span></p>
+                        <p className="text-2xl font-bold text-white mb-1">$16 <span className="text-sm font-normal text-muted">/ hó (+ÁFA)</span></p>
                         <p className="text-sm text-gray-400 mb-6 italic">Neved legyen a stáblistában!</p>
 
                         <div className="space-y-3 text-sm text-gray-300 mb-6 flex-grow">
@@ -75,12 +75,12 @@ export default function PatreonCTA() {
                             <ul className="list-disc list-inside space-y-1 pl-1">
                                 <li><strong className="text-white">Minden fentebb</strong></li>
                                 <li><strong className="text-white">Név megjelenik a videók kreditjeiben</strong></li>
-                                <li>Patreon-only képcsomagok (letölthető)</li>
+                                <li>Patreon-exkluzív képcsomagok (letölthető)</li>
                                 <li>Előzetes infók jövőbeli projektekről</li>
                                 <li>Hosszabb, személyesebb posztok (nem publikus)</li>
                             </ul>
                         </div>
-                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-white/10 hover:bg-white/20 text-white text-center font-heading uppercase transition-colors rounded">Join</a>
+                        <a href="https://www.patreon.com/c/Titoksorozat" target="_blank" className="w-full py-3 bg-white/10 hover:bg-white/20 text-white text-center font-heading uppercase transition-colors rounded">Csatlakozás</a>
                     </div>
 
                 </div>

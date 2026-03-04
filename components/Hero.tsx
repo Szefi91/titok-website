@@ -97,7 +97,7 @@ export default function Hero() {
                 </p>
 
                 <div className="text-sm text-gray-600 max-w-lg mx-auto mb-8 animate-fade-in-up delay-200 mt-4 font-mono">
-                    &gt; SYSTEM RESTORE INITIATED...
+                    &gt; RENDSZER-HELYREÁLLÍTÁS ELINDÍTVA...
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
@@ -158,7 +158,7 @@ export default function Hero() {
                                     priority
                                     className="object-contain"
                                 />
-                                <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: KOS_AMI_KUSSOL.PNG</p>
+                                <p className="absolute -bottom-3 left-0 text-[6px] md:text-[8px] font-mono text-white/20">AKTAFÁJL: KOS_AMI_KUSSOL.PNG</p>
                             </div>
                         </div>
 
@@ -172,7 +172,7 @@ export default function Hero() {
                                     sizes="(max-width: 768px) 96px, 224px"
                                     className="object-contain"
                                 />
-                                <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">FILE: MASZK.PNG</p>
+                                <p className="absolute -bottom-3 right-0 text-[6px] md:text-[8px] font-mono text-white/20">AKTAFÁJL: MASZK.PNG</p>
                             </div>
                         </div>
                     </>

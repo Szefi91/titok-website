@@ -51,7 +51,7 @@ export default function Header() {
                     </Link>
 
                     <Link href={getPath("#shop")} className="group flex items-center gap-1.5 text-[10px] md:text-sm uppercase tracking-wider text-accent hover:text-white transition-colors font-bold">
-                        Shop
+                        Bolt
                         <span className="text-[7px] md:text-[9px] px-1 md:px-1.5 py-0.5 bg-accent/10 border border-accent/20 rounded text-accent font-normal normal-case animate-pulse hidden xs:inline">
                             Hamarosan
                         </span>
@@ -71,7 +71,7 @@ export default function Header() {
                             onClick={() => window.dispatchEvent(new CustomEvent("open-secret-terminal"))}
                             className="text-[8px] md:text-[10px] font-mono text-red-500 border border-red-900/50 px-1.5 py-0.5 md:px-2 md:py-1 animate-pulse bg-red-900/10 hover:bg-red-900/30 transition-colors uppercase"
                         >
-                            CMD
+PAR
                         </button>
                     )}
                 </nav>
