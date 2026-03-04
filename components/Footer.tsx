@@ -50,12 +50,10 @@ export default function Footer() {
 
                 <div className="text-[10px] text-zinc-600 flex flex-col items-center gap-2">
                     <p>&copy; {new Date().getFullYear()} Minden jog fenntartva.</p>
-                    <div className="flex items-center gap-4 uppercase tracking-widest">
-                        <a href="/adatkezeles" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800">Adatkezelési Tájékoztató</a>
-                        {AKTA_ENABLED && (
-                            <a href="/aktak" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800">Akták</a>
-                        )}
-                    </div>
+                    <a href="/adatkezeles" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800 uppercase tracking-widest">Adatkezelési Tájékoztató</a>
+                    {AKTA_ENABLED && (
+                        <a href="/aktak" className="text-[9px] hover:text-zinc-400 transition-colors underline decoration-zinc-800 uppercase tracking-[0.18em] opacity-90">Akták</a>
+                    )}
                 </div>
                 <p className="text-[10px] text-zinc-800 mt-4 opacity-50">
                     Az oldal cookie-kat használ (csak a rettegés fokozására).
