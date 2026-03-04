@@ -6,11 +6,11 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 
 function One({ children = "1" }: { children?: string }) {
-  return <span className="text-red-500 font-bold drop-shadow-[0_0_6px_rgba(239,68,68,0.75)]">{children}</span>;
+  return <span className="font-bold text-zinc-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.45)]">{children}</span>;
 }
 
 function Zero({ children = "0" }: { children?: string }) {
-  return <span className="text-emerald-500 font-bold drop-shadow-[0_0_6px_rgba(16,185,129,0.75)]">{children}</span>;
+  return <span className="font-bold text-zinc-100 drop-shadow-[0_0_6px_rgba(255,255,255,0.45)]">{children}</span>;
 }
 
 export default function A017Page() {
@@ -82,14 +82,14 @@ export default function A017Page() {
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
                 A tárgy begyűjtése Budapest XVIII. kerületében történt. A helyszínre érkező egységet a B-<Zero>0</Zero><Zero>0</Zero> jelű riasztás indította,
                 az esetet pedig <One>1</One>-es szintű kivizsgálásra sorolták. A lakás az épület <One>1</One>. emeletén volt,
-                az ajtón külső behatolásra utaló nyomot <Zero>0</Zero> ponton rögzítettek.
+                az ajtón külső behatolásra utaló nyomot sem rögzítettek.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
-                Bent egy férfi holttestét találták a nappali közepén, a halál idejét kb. <One>1</One> napra becsülték.
-                A csengőt a helyszínen <One>1</One> technikai egység vizsgálta át, szerkezeti sérülést nem találtak.
-                Nappali üzemmódban az eltéréskód <Zero>0</Zero> maradt, majd az éjszakai megfigyelési naplóban 22:3<Zero>0</Zero>-nál
-                és 23:0<Zero>0</Zero>-nál is esemény nélküli bejegyzés szerepelt.
+                Bent egy férfi holttestét találták a nappali közepén, a halál idejét kb. <Zero>0</Zero><One>1</One>:45-re tehető.
+                A csengőt a helyszínen <One>1</One> technikai egység vizsgálta át, sérülést nem találtak.
+                Nappal 12:07-kor tesztelték, semmi reagálást nem tapasztaltak, majd az éjszakai megfigyelési naplóban 22:30-nál és 23:00-nál is
+                esemény nélküli bejegyzés szerepelt.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
