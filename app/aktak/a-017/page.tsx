@@ -88,7 +88,7 @@ export default function A017Page() {
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
                 Bent egy férfi holttestét találták a nappali közepén, a halál idejét kb. <Zero>0</Zero><One>1</One>:45-re tehető.
                 A csengőt a helyszínen <One>1</One> technikai egység vizsgálta át, sérülést nem találtak.
-                Nappal 12:07-kor tesztelték, semmi reagálást nem tapasztaltak, majd az éjszakai megfigyelési naplóban 22:30-nál és 23:00-nál is
+                Nappal 12:07-kor tesztelték, semmi reagálást nem tapasztaltak, majd az éjszakai megfigyelési naplóban 22:3<Zero>0</Zero>-nál és 23:<Zero>0</Zero><Zero>0</Zero>-nál is
                 esemény nélküli bejegyzés szerepelt.
               </p>
 
@@ -98,10 +98,6 @@ export default function A017Page() {
                 Az utolsó rendszerbejegyzés 00:0<Zero>0</Zero>, ezt követően a csengő néma maradt; az ügy vizsgálata folyamatban van.
               </p>
 
-              <p className="mt-5 leading-relaxed font-mono text-[14px] text-zinc-400 uppercase tracking-[0.16em]">
-                Kiemelt mintasor:
-                <span className="ml-2"><Zero>0</Zero><Zero>0</Zero><One>1</One><One>1</One><Zero>0</Zero><One>1</One><One>1</One><Zero>0</Zero><Zero>0</Zero><Zero>0</Zero><One>1</One><Zero>0</Zero><One>1</One><One>1</One><One>1</One><Zero>0</Zero></span>
-              </p>
             </article>
 
             <aside className="space-y-5">
