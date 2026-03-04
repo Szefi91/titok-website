@@ -82,21 +82,21 @@ export default function A017Page() {
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
                 A tárgy begyűjtése Budapest XVIII. kerületében történt. A helyszínre érkező egységet a B-<Zero>0</Zero><Zero>0</Zero> jelű riasztás indította el,
                 amely egy régi társasház egyik lakásából futott be. A beérkező csapat szerint az eset <One>1</One>-es szintű kivizsgálást igényelt.
-                A lakás az épület <One>1</One>. emeletén, a folyosó végén volt; az ajtó zárva volt, erőszakos behatolás nyoma <Zero>0</Zero> esetben sem látszott.
+                A lakás az épület <One>1</One>. emeletén, a folyosó végén volt; az ajtó zárva volt, és behatolásra utaló nyomot <Zero>0</Zero> alkalommal rögzítettek.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
                 Bent egy férfi holttestét találták a nappali közepén, a halál idejét körülbelül <One>1</One> napra becsülték.
                 A test mellett fekvő kézi csengőt <One>1</One> technikai egység vizsgálta meg első körben.
-                A szerkezet ép volt, külső sérülést <Zero>0</Zero> darabot sem találtak, és nappali méréseknél a műszerek
-                <Zero>0</Zero> rendellenességet jeleztek. Az első eltérés csak <Zero>0</Zero>:00-kor jelentkezett: a csengő mozdulatlan maradt,
-                mégis <One>1</One> különálló hangimpulzus megjelent a felvételen.
+                A szerkezet ép volt, külsérelmi nyomot <Zero>0</Zero> ponton találtak, nappali mérésben pedig
+                <Zero>0</Zero> anomália jelent meg. Az első eltérés csak <Zero>0</Zero>:00-kor jelentkezett: a csengő mozdulatlan maradt,
+                mégis <One>1</One> különálló hangimpulzus bekerült a felvételbe.
               </p>
 
               <p className="mt-4 leading-relaxed font-mono text-[15px] text-zinc-300">
                 A következő vizsgálati ciklusban a szenzorok <Zero>0</Zero> azonosítható forrást mutattak a helyiségben,
                 ennek ellenére <One>1</One>, majd <One>1</One> egymást követő rezonanciát rögzítettek.
-                Az utolsó bejegyzett esemény <One>1</One> rövid hang volt, amely után a rendszer <Zero>0</Zero> állapotjelzéssel leállt.
+                Az utolsó bejegyzett esemény <One>1</One> rövid hang volt, amely után a rendszer <Zero>0</Zero> állapotkódra váltva leállt.
                 A csengő azóta sem szólalt meg; az eset vizsgálata továbbra is folyamatban van.
               </p>
             </article>
