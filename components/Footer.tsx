@@ -48,15 +48,15 @@ export default function Footer() {
 
                 <p className="text-white font-heading text-2xl tracking-widest mb-4">TITOK</p>
 
-                <p className="text-[10px] text-zinc-600 flex flex-col items-center gap-2">
-                    <span>&copy; {new Date().getFullYear()} Minden jog fenntartva.</span>
+                <div className="text-[10px] text-zinc-600 flex flex-col items-center gap-2">
+                    <p>&copy; {new Date().getFullYear()} Minden jog fenntartva.</p>
                     <div className="flex items-center gap-4 uppercase tracking-widest">
                         <a href="/adatkezeles" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800">Adatkezelési Tájékoztató</a>
                         {AKTA_ENABLED && (
                             <a href="/aktak" className="hover:text-zinc-400 transition-colors underline decoration-zinc-800">Akták</a>
                         )}
                     </div>
-                </p>
+                </div>
                 <p className="text-[10px] text-zinc-800 mt-4 opacity-50">
                     Az oldal cookie-kat használ (csak a rettegés fokozására).
                 </p>
