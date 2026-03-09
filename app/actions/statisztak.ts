@@ -75,11 +75,6 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
     }
 
     try {
-        // #region agent log
-        const hasSupabaseUrl = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
-        const hasServiceKey = Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
-        fetch('http://127.0.0.1:7296/ingest/0d54fc1c-c5ae-4811-ae09-b5e164628bcf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '41e666' }, body: JSON.stringify({ sessionId: '41e666', location: 'statisztak.ts:insert-before', message: 'Supabase env check', data: { hasSupabaseUrl, hasServiceKey }, timestamp: Date.now(), hypothesisId: 'H3' }) }).catch(() => {});
-        // #endregion
         const { error } = await supabaseAdmin.from('statiszta_signups').insert({
             full_name: fullName,
             email,
@@ -93,9 +88,6 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
         });
 
         if (error) {
-            // #region agent log
-            fetch('http://127.0.0.1:7296/ingest/0d54fc1c-c5ae-4811-ae09-b5e164628bcf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '41e666' }, body: JSON.stringify({ sessionId: '41e666', location: 'statisztak.ts:insert-error', message: 'Supabase insert error', data: { code: error.code, message: error.message, details: error.details, hint: error.hint }, timestamp: Date.now(), hypothesisId: 'H1-H2-H4-H5' }) }).catch(() => {});
-            // #endregion
             console.error('[submitExtrasSignup] Supabase insert error', error);
             return { error: 'Nem sikerült rögzíteni a jelentkezést. Próbáld meg pár perc múlva.' };
         }
@@ -165,10 +157,6 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
 
         return { success: true };
     } catch (err) {
-        // #region agent log
-        const errMsg = err instanceof Error ? err.message : String(err);
-        fetch('http://127.0.0.1:7296/ingest/0d54fc1c-c5ae-4811-ae09-b5e164628bcf', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '41e666' }, body: JSON.stringify({ sessionId: '41e666', location: 'statisztak.ts:catch', message: 'Unexpected error', data: { errMsg }, timestamp: Date.now(), hypothesisId: 'H2' }) }).catch(() => {});
-        // #endregion
         console.error('[submitExtrasSignup] Unexpected error', err);
         return { error: 'Valami félrement. Próbáld meg később, vagy írj a stábnak.' };
     }
