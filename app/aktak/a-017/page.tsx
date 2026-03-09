@@ -118,7 +118,6 @@ export default function A017Page() {
                   className="w-full mt-2 [filter:invert(1)_hue-rotate(180deg)_saturate(.6)_contrast(1.1)] opacity-90"
                 >
                   <source src="/assets/csengo-akta-hang.mp3" type="audio/mpeg" />
-                  <source src="/silkade.wav" type="audio/wav" />
                 </audio>
               </div>
             </aside>

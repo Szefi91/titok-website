@@ -203,6 +203,52 @@ h6 {
   animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
 }
 
+/* S29 / Statiszta jelentkezés – enyhe effektek */
+@keyframes s29-card-glow {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 20px rgba(122,17,17,0.06); }
+  50% { box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 28px rgba(122,17,17,0.1); }
+}
+
+@keyframes s29-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes s29-count-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+.s29-card {
+  animation: s29-card-glow 4s ease-in-out infinite, s29-fade-in 0.5s ease-out forwards;
+}
+
+.s29-count {
+  animation: s29-count-pulse 2.5s ease-in-out infinite;
+}
+
+.s29-input-focus:focus {
+  box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.5), 0 0 12px rgba(122, 17, 17, 0.15);
+}
+
+.s29-btn:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.6), 0 0 16px rgba(122, 17, 17, 0.2);
+}
+
+/* Statiszta admin print styles */
+@media print {
+  body.statiszta-admin-print {
+    background: #fff !important;
+  }
+  body.statiszta-admin-print * {
+    color: #111 !important;
+  }
+  body.statiszta-admin-print th,
+  body.statiszta-admin-print td {
+    color: #333 !important;
+  }
+}
+
 /* Newsletter Input Autofill Fix */
 input:-webkit-autofill,
 input:-webkit-autofill:hover,

@@ -1,27 +1,31 @@
 'use client';
 
 import { useEffect, useState, use } from 'react';
-import { unsubscribeAction } from '@/app/actions/unsubscribe';
+import { unsubscribeAction, unsubscribeByEmailAction } from '@/app/actions/unsubscribe';
 import Link from 'next/link';
 
 export default function UnsubscribePage({
     searchParams,
 }: {
-    searchParams: Promise<{ id: string }>;
+    searchParams: Promise<{ id?: string; email?: string }>;
 }) {
-    const { id } = use(searchParams);
+    const { id, email } = use(searchParams);
     const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
     const [message, setMessage] = useState('Leiratkozás feldolgozása...');
 
     useEffect(() => {
         const performUnsubscribe = async () => {
-            if (!id) {
+            let result;
+
+            if (id) {
+                result = await unsubscribeAction(id);
+            } else if (email) {
+                result = await unsubscribeByEmailAction(email);
+            } else {
                 setStatus('error');
-                setMessage('Hiányzó azonosító. Nem sikerült a leiratkozás.');
+                setMessage('Hiányzó azonosító vagy email cím. Nem sikerült a leiratkozás.');
                 return;
             }
-
-            const result = await unsubscribeAction(id);
 
             if (result.success) {
                 setStatus('success');
@@ -33,7 +37,7 @@ export default function UnsubscribePage({
         };
 
         performUnsubscribe();
-    }, [id]);
+    }, [id, email]);
 
     return (
         <main className="min-h-screen bg-[#050505] flex items-center justify-center p-4 font-mono">
