@@ -203,35 +203,35 @@ h6 {
   animation: typing 3.5s steps(40, end), blink .75s step-end infinite;
 }
 
-/* S29 / Statiszta jelentkezés – enyhe effektek */
-@keyframes s29-card-glow {
+/* Rec / Statiszta jelentkezés – enyhe effektek */
+@keyframes rec-card-glow {
   0%, 100% { box-shadow: 0 0 0 1px rgba(255,255,255,0.05), 0 0 20px rgba(122,17,17,0.06); }
   50% { box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 0 28px rgba(122,17,17,0.1); }
 }
 
-@keyframes s29-fade-in {
+@keyframes rec-fade-in {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes s29-count-pulse {
+@keyframes rec-count-pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.85; }
 }
 
-.s29-card {
-  animation: s29-card-glow 4s ease-in-out infinite, s29-fade-in 0.5s ease-out forwards;
+.rec-card {
+  animation: rec-card-glow 4s ease-in-out infinite, rec-fade-in 0.5s ease-out forwards;
 }
 
-.s29-count {
-  animation: s29-count-pulse 2.5s ease-in-out infinite;
+.rec-count {
+  animation: rec-count-pulse 2.5s ease-in-out infinite;
 }
 
-.s29-input-focus:focus {
+.rec-input-focus:focus {
   box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.5), 0 0 12px rgba(122, 17, 17, 0.15);
 }
 
-.s29-btn:hover:not(:disabled) {
+.rec-btn:hover:not(:disabled) {
   box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.6), 0 0 16px rgba(122, 17, 17, 0.2);
 }
 

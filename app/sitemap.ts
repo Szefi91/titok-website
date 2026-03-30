@@ -19,10 +19,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${base}/s29`,
+      url: `${base}/jelentkezes`,
       lastModified: now,
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${base}/adatkezeles`,

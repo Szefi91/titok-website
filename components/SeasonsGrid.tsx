@@ -129,29 +129,35 @@ export default function SeasonsGrid() {
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {seasonsData.seasons.map((season) => (
-                        <div key={season.number} className="group relative bg-[#0b0b0b] border border-white/5 overflow-hidden hover:border-accent/30 transition-colors duration-300 flex flex-col">
-                            <div className="aspect-video bg-black/50 flex items-center justify-center relative cursor-pointer group-video">
-                                <div className="text-6xl font-heading text-white/10 group-hover:text-white/20 transition-colors z-10">
+                        <a 
+                            key={season.number} 
+                            href={season.youtubePlaylistUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group relative bg-[#0b0b0b] border border-white/5 overflow-hidden hover:border-accent/30 transition-colors duration-300 flex flex-col no-underline"
+                        >
+                            <div className="aspect-video bg-black/50 flex items-center justify-center relative cursor-pointer group-video overflow-hidden">
+                                {/* Image Slider */}
+                                {(season as any).images && (season as any).images.length > 0 && (
+                                    <SeasonImageSlider images={(season as any).images} />
+                                )}
+                                
+                                <div className="text-6xl font-heading text-white/20 group-hover:text-white/40 transition-colors z-10 drop-shadow-lg">
                                     S{season.number}
                                 </div>
 
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#0b0b0b] via-black/40 to-transparent pointer-events-none" />
                             </div>
 
                             <div className="p-6 flex flex-col flex-grow">
                                 <h3 className="text-2xl font-heading text-white mb-2">{season.title}</h3>
                                 <p className="text-muted text-sm mb-6 flex-grow">{season.description}</p>
 
-                                <a
-                                    href={season.youtubePlaylistUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-block text-accent hover:text-white uppercase text-sm tracking-wider font-bold transition-colors mt-auto"
-                                >
+                                <div className="inline-block text-accent group-hover:text-white uppercase text-sm tracking-wider font-bold transition-colors mt-auto">
                                     Lejátszási lista &rarr;
-                                </a>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             </div>
@@ -181,5 +187,36 @@ export default function SeasonsGrid() {
                 </div>
             </div>
         </section>
+    );
+}
+
+function SeasonImageSlider({ images }: { images: string[] }) {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        if (!images || images.length <= 1) return;
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % images.length);
+        }, 3000 + Math.random() * 1000); // 3-4s random interval so they are out of sync
+        return () => clearInterval(interval);
+    }, [images]);
+
+    if (!images || images.length === 0) return null;
+
+    return (
+        <>
+            {images.map((img, idx) => (
+                <div 
+                    key={img}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${idx === currentIndex ? 'opacity-100' : 'opacity-0'}`}
+                >
+                    <img 
+                        src={img} 
+                        alt="Season Preview" 
+                        className="w-full h-full object-cover opacity-60 grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                    />
+                </div>
+            ))}
+        </>
     );
 }

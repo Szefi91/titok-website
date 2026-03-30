@@ -2,7 +2,7 @@
 
 import { useEffect, useState, use } from 'react';
 import Link from 'next/link';
-import { getStatisztaSignups, deleteStatisztaSignup, type StatisztaSignup, type StatisztaAdminData } from '@/app/actions/statisztak';
+import { getStatisztaSignups, deleteStatisztaSignup, type StatisztaSignup, type StatisztaAdminData } from '@/app/actions/jelentkezes';
 
 export default function StatisztakAdminPage({
     searchParams,
@@ -87,7 +87,7 @@ export default function StatisztakAdminPage({
                         <h1 className="text-2xl md:text-3xl font-heading tracking-[0.3em] text-white uppercase">
                             Statiszta admin
                         </h1>
-                        <p className="text-xs text-muted tracking-[0.3em] mt-1">Jelentkezések • 2026.03.29</p>
+                        <p className="text-xs text-muted tracking-[0.3em] mt-1">Stáb & Statiszta Bázis</p>
                     </div>
                     <div className="flex gap-3">
                         <button
@@ -98,18 +98,16 @@ export default function StatisztakAdminPage({
                             Nyomtatás
                         </button>
                         <Link
-                            href="/s29"
+                            href="/jelentkezes"
                             className="px-4 py-2 border border-white/10 text-white/80 hover:border-white/30 transition text-xs tracking-widest uppercase print:hidden"
                         >
-                            Statiszta oldal
+                            Jelentkezési oldal
                         </Link>
                     </div>
                 </div>
 
-                <div className="grid gap-4 md:grid-cols-3 mb-8 print:mb-4">
-                    <StatCard title="Összesen" value={stats.total} />
-                    <StatCard title="Magyaros pizza" value={stats.magyaros} />
-                    <StatCard title="Vegetáriánus pizza" value={stats.vegetarian} />
+                <div className="grid gap-4 md:grid-cols-1 mb-8 print:mb-4">
+                    <StatCard title="Összesen az adatbázisban" value={stats.total} />
                 </div>
 
                 <div className="border border-white/10 bg-black/50 overflow-hidden print:border-0 print:bg-transparent">
@@ -120,7 +118,7 @@ export default function StatisztakAdminPage({
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase">#</th>
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase">Név</th>
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase">Email</th>
-                                    <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase">Pizza</th>
+                                    <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase">Érdeklődés</th>
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase hidden md:table-cell">Megjegyzés</th>
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase hidden md:table-cell">Jelentkezés</th>
                                     <th className="text-left py-3 px-4 text-[10px] tracking-[0.3em] text-red-500 uppercase print:hidden">Törlés</th>
@@ -132,7 +130,7 @@ export default function StatisztakAdminPage({
                                         <td className="py-3 px-4 text-muted">{i + 1}</td>
                                         <td className="py-3 px-4 text-white font-medium">{s.full_name}</td>
                                         <td className="py-3 px-4 text-white/80">{s.email}</td>
-                                        <td className="py-3 px-4 text-white/80">{s.pizza_preference === 'vegetarian' ? 'Vegetáriánus' : 'Magyaros'}</td>
+                                        <td className="py-3 px-4 text-white/80">{s.preferred_role || 'Statiszta'}</td>
                                         <td className="py-3 px-4 text-muted text-xs max-w-[200px] truncate hidden md:table-cell">{s.notes || '—'}</td>
                                         <td className="py-3 px-4 text-muted text-xs hidden md:table-cell">
                                             {new Date(s.created_at).toLocaleString('hu-HU')}

@@ -7,6 +7,7 @@ import VisibilityHandler from "@/components/effects/VisibilityHandler";
 import CrackEffect from "@/components/effects/CrackEffect";
 import FlashlightEffect from "@/components/effects/FlashlightEffect";
 import FloatingQuotes from "@/components/effects/FloatingQuotes";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -74,13 +75,31 @@ export default function RootLayout({
     <html lang="hu">
       <head>
         <meta name="google-adsense-account" content="ca-pub-3063723181881847" />
-        <script
+        <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3063723181881847"
           crossOrigin="anonymous"
-        ></script>
+          strategy="afterInteractive"
+        />
+        <Script id="google-tag-manager" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','GTM-NFVT7GXT');
+          `}
+        </Script>
       </head>
       <body className={`${inter.variable} ${oswald.variable} antialiased bg-[#050505] text-[#E6E6E6] relative`}>
+        <noscript>
+          <iframe 
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NFVT7GXT"
+            height="0" 
+            width="0" 
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <VisibilityHandler />
         <CrackEffect />
         <FlashlightEffect />

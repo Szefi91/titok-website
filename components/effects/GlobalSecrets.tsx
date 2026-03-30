@@ -171,11 +171,11 @@ export default function GlobalSecrets() {
 
                 // Stage 3: Final scroll after 5s more (30s total)
                 ghostTimer2 = setTimeout(() => {
-                    const footer = document.querySelector('footer');
-                    if (footer) {
+                    const shopSection = document.getElementById('shop');
+                    if (shopSection) {
                         isAutoScrolling.current = true;
-                        // Scroll to the absolute bottom
-                        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                        // Scroll to the bottom of the #shop section where the encyption message is
+                        shopSection.scrollIntoView({ behavior: 'smooth', block: 'end' });
 
                         setTimeout(() => {
                             isAutoScrolling.current = false;

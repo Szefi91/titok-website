@@ -7,6 +7,9 @@
       "title": "1. Évad",
       "youtubePlaylistUrl": "https://www.youtube.com/watch?v=GV_QojhH9pk&list=PL22WkYqXKep_HgheWgrK1FskiWLw6aodW",
       "description": "Kezdet.. Szefi és Castiel furcsa találkozása a slendermannel",
+      "images": [
+        "/1.season/1.season.jpeg"
+      ],
       "episodes": []
     },
     {
@@ -14,6 +17,16 @@
       "title": "2. Évad",
       "youtubePlaylistUrl": "https://www.youtube.com/watch?v=-EbdROL8DFA&list=PL22WkYqXKep8v29udfzUpCjWDJuKHya4b",
       "description": "Szefi és Castiel haza költöztek magyarországra, majd üzeneteket kapnak, majd Szentesen ragadnak egy karanténban",
+      "images": [
+        "/2.season/ep_1.jpg",
+        "/2.season/ep_2.jpg",
+        "/2.season/ep_3.jpg",
+        "/2.season/ep_4.jpg",
+        "/2.season/ep_6.jpg",
+        "/2.season/ep_7.jpg",
+        "/2.season/ep_8.jpg",
+        "/2.season/titok_9.jpg"
+      ],
       "episodes": []
     },
     {
@@ -21,6 +34,16 @@
       "title": "3. Évad",
       "youtubePlaylistUrl": "https://www.youtube.com/watch?v=3OBL_qooSNc&list=PL22WkYqXKep9I7YDQttVYSw5Yo_6aTJEd",
       "description": "A valóság repedése. Amikor a legenda túl sok valóságban válik igazzá.",
+      "images": [
+        "/3.season/ep_1.jpg",
+        "/3.season/ep_2.jpg",
+        "/3.season/ep_3.jpg",
+        "/3.season/ep_4.jpg",
+        "/3.season/ep_5.jpg",
+        "/3.season/ep_6.jpg",
+        "/3.season/ep_7.jpg",
+        "/3.season/ep_8.jpg"
+      ],
       "episodes": []
     }
   ]

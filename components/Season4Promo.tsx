@@ -14,19 +14,16 @@ export default function Season4Promo() {
                 </h2>
 
                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <div className="space-y-6">
-                        <p className="text-lg text-muted leading-relaxed">
-                            A TITOK egy magyar found footage, pszichológiai horror, indie kézikamerás sorozat.
-                            Rejtélyek, kódok és egy sötét történet, ami a valóság határait feszegeti.
+                    <div className="space-y-4">
+                        <p className="text-base text-muted leading-relaxed">
+                            A <span className="text-white font-medium tracking-wider">TITOK</span> sorozat alapjait Szefi és Castiel fektették le még 2012-ben. A rejtélyes formátumot a Marble Hornets áldokumentarista stílusa és a Slenderman legendája ihlette. A legfőbb koncepció a kezdetektől az volt, hogy a rettegést a lehető legvalósághűbb formában adjuk át a nézőknek.
                         </p>
-                        <ul className="space-y-4">
-                            {features.map((feature, index) => (
-                                <li key={index} className="flex items-center text-lg text-white/90">
-                                    <span className="w-2 h-2 bg-accent mr-3 rounded-full animate-pulse"></span>
-                                    {feature}
-                                </li>
-                            ))}
-                        </ul>
+                        <p className="text-base text-muted leading-relaxed">
+                            A sorozat az évek során sokat fejlődött és egyre kiforrottabbá vált. A kísérletező jellegű első szezont egy tudatosabban felépített második évad követte,  bár még mindig sok improvizációt tartalmazott. A <span className="text-red-400 font-medium tracking-wider">harmadik évad</span> egy sokkal történetközpontúbb és kidolgozottabb irányba vitte el a projektet.
+                        </p>
+                        <p className="text-base text-muted leading-relaxed border-l-2 border-accent pl-4">
+                            Sikerült felépíteni egy különleges univerzumot, ahol a különböző évadok önálló történeteket ölelnek fel, látszólag nem is kötődnek egymáshoz szorosan... <span className="text-white/80 italic">A mélyben azonban konkrét pontokon utalnak vissza a korábbi évadokra.</span>
+                        </p>
                     </div>
 
                     <div className="bg-[#050505] p-8 border border-white/10 relative">

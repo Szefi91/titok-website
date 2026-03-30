@@ -1,60 +1,40 @@
 'use client';
 
-import { useState, useTransition, useEffect } from 'react';
+import { useState, useTransition } from 'react';
 import type { ReactNode } from 'react';
-import { submitExtrasSignup, getStatisztaSignupCount } from '@/app/actions/statisztak';
-
-const LOCATION_ADDRESS = '2100 Gödöllő, Páter Károly utca 1. – Szőkőkút (Egyetem főbejárat)';
-const LOCATION_COORDS = '47.59461961349297,19.361063071517254';
-const TARGET_COUNT = 35;
-const MAP_LINK = 'https://maps.app.goo.gl/33VoqV57CobGUmPo6';
-const MAP_EMBED = `https://www.google.com/maps?q=${LOCATION_COORDS}&z=17&output=embed`;
+import { submitExtrasSignup } from '@/app/actions/jelentkezes';
 
 const conductPoints = [
-    'Önkéntes részvétel – nincs díjazás, cserébe víz + pizza + stábtámogatás jár.',
-    'Dress code: sima hétköznapi ruha (civil, logómentes, visszafogott).',
-    'Gyülekező 12:40-kor a gödöllői szökőkútnál (Páter Károly u. 1.); késés nincs, a stáb döntése végleges.',
+    'Önkéntes részvétel – nincs díjazás, cserébe catering + stábtámogatás jár.',
+    'A forgatási napok változóak, mindig előre egyeztetünk veled.',
+    'A felvételre kerülésről és részletekről (helyszín, időpont, dress code) belső levelezésen keresztül értesítünk.',
 ];
 
-const inputClass = 'w-full bg-black/70 border border-white/10 text-white placeholder-white/30 font-mono text-base sm:text-sm py-3 px-4 outline-none focus:border-red-900/50 transition-all duration-200 disabled:opacity-50 s29-input-focus min-h-[48px]';
+const inputClass = 'w-full bg-black/70 border border-white/10 text-white placeholder-white/30 font-mono text-base sm:text-sm py-3 px-4 outline-none focus:border-red-900/50 transition-all duration-200 disabled:opacity-50 rec-input-focus min-h-[48px]';
 
 export default function ExtrasForm() {
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [preferredRole, setPreferredRole] = useState('');
     const [notes, setNotes] = useState('');
-    const [pizzaPreference, setPizzaPreference] = useState<'magyaros' | 'vegetarian'>('magyaros');
-    const [attendanceCommit, setAttendanceCommit] = useState(false);
     const [acceptsCode, setAcceptsCode] = useState(false);
+    const [databaseCommit, setDatabaseCommit] = useState(false);
     const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState('');
     const [isPending, startTransition] = useTransition();
-    const [signupCount, setSignupCount] = useState<number | null>(null);
-
-    useEffect(() => {
-        getStatisztaSignupCount().then(setSignupCount);
-    }, []);
-
-    const refreshCount = () => getStatisztaSignupCount().then(setSignupCount);
-
-    const handleCopyAddress = () => {
-        if (typeof navigator !== 'undefined' && navigator.clipboard) {
-            navigator.clipboard.writeText(LOCATION_ADDRESS).catch(() => undefined);
-        }
-    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!acceptsCode) {
             setStatus('error');
-            setMessage('A részvételhez el kell fogadnod a szabályokat.');
+            setMessage('A jelentkezéshez el kell fogadnod a szabályokat.');
             return;
         }
 
-        if (!attendanceCommit) {
+        if (!databaseCommit) {
             setStatus('error');
-            setMessage('Pipáld be, hogy 100%-ban számíthassunk rád a szökőkútnál.');
+            setMessage('Kérjük, egyezz bele az adatbázisba kerülésbe.');
             return;
         }
 
@@ -65,13 +45,14 @@ export default function ExtrasForm() {
             const result = await submitExtrasSignup({
                 fullName,
                 email,
-                availabilitySlot: '2026-03-29_confirmed',
+                availabilitySlot: 'general-database',
                 preferredRole,
                 notes,
                 acceptsCode,
-                pizzaPreference,
-                confirmedAttendance: attendanceCommit,
-                futureInterest: false,
+                // Passing a default for required legacy fields
+                pizzaPreference: 'magyaros',
+                confirmedAttendance: true,
+                futureInterest: true,
             });
 
             if (result?.error) {
@@ -81,50 +62,69 @@ export default function ExtrasForm() {
             }
 
             setStatus('success');
-            setMessage('Rögzítettük a jelentkezésed. A forgatás előtt részletes e-mailt küldünk.');
-            refreshCount();
+            setMessage('Jelentkezés sikeres! Bekerültél az adatbázisba, keresni fogunk.');
             setFullName('');
             setEmail('');
             setPreferredRole('');
             setNotes('');
-            setPizzaPreference('magyaros');
-            setAttendanceCommit(false);
+            setDatabaseCommit(false);
             setAcceptsCode(false);
         });
     };
 
     return (
-        <div className="relative w-full mx-auto border border-white/5 bg-black/70 backdrop-blur-md p-4 sm:p-6 md:p-10 overflow-hidden s29-card">
-            <div className="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(122,17,17,.5),_transparent_60%)]" />
-            {signupCount !== null && (
-                <div className="absolute top-3 right-3 sm:top-5 sm:right-5 md:top-6 md:right-6 z-20 s29-count">
-                    <span className="inline-block px-2 py-1 sm:px-3 sm:py-1.5 border border-green-700/50 bg-green-950/40 text-green-400 font-mono text-[10px] sm:text-xs tracking-wider text-right max-w-[140px] sm:max-w-none">
-                        <span className="sm:hidden">{signupCount}/{TARGET_COUNT}</span>
-                        <span className="hidden sm:inline">{signupCount} / {TARGET_COUNT} statiszta jelentkezett</span>
-                    </span>
+        <div className="relative w-full mx-auto border border-red-900/30 bg-black/80 backdrop-blur-md p-4 sm:p-8 md:p-10 overflow-hidden shadow-[0_0_30px_rgba(122,17,17,0.1)] rec-card max-w-5xl mt-6 lg:mt-10">
+            {/* ARG Background Effects */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(255,0,0,.8),_transparent_70%)]" />
+            
+            {/* Camera Viewport / Recording HUD overlay */}
+            <div className="absolute inset-0 pointer-events-none z-0">
+                <div className="absolute top-4 right-4 flex items-center gap-2 md:gap-3">
+                    <span className="font-mono text-[10px] md:text-xs text-red-600 tracking-[0.3em] uppercase opacity-80 animate-flicker">REC</span>
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-600 animate-pulse shadow-[0_0_8px_rgba(220,38,38,0.8)]" />
                 </div>
-            )}
+                
+                {/* Viewfinder crosshairs */}
+                <div className="hidden md:block absolute top-[20%] left-[10%] w-4 h-4 border-t-2 border-l-2 border-white/10" />
+                <div className="hidden md:block absolute top-[20%] right-[10%] w-4 h-4 border-t-2 border-r-2 border-white/10" />
+                <div className="hidden md:block absolute bottom-[20%] left-[10%] w-4 h-4 border-b-2 border-l-2 border-white/10" />
+                <div className="hidden md:block absolute bottom-[20%] right-[10%] w-4 h-4 border-b-2 border-r-2 border-white/10" />
+
+                {/* Subtle moving scanline overlay specifically for the form */}
+                <div className="absolute top-0 left-0 w-full h-[5%] bg-gradient-to-b from-transparent via-red-900/20 to-transparent opacity-40 animate-scanline z-10" />
+            </div>
+
             <div className="relative z-10 space-y-6 sm:space-y-8">
                 <div className="space-y-2 sm:space-y-3">
-                    <p className="text-[10px] sm:text-xs font-mono tracking-[0.3em] sm:tracking-[0.5em] text-red-600 uppercase">#29MÁRC • EGYETEMI JELENET</p>
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading tracking-[0.2em] sm:tracking-[0.4em]">STATISZTA JELENTKEZÉS</h1>
+                    <div className="flex justify-between items-end">
+                        <p className="text-[10px] sm:text-xs font-mono tracking-[0.3em] sm:tracking-[0.5em] text-red-600 uppercase">
+                            #CSATLAKOZZ A STÁBHOZ
+                        </p>
+                        <p className="hidden md:block text-[8px] font-mono text-red-500/40 uppercase tracking-widest animate-flicker">
+                            SYS_LINK_SECURE
+                        </p>
+                    </div>
+                    
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading tracking-[0.2em] sm:tracking-[0.4em] relative inline-block group">
+                        <span className="relative z-10 text-glow-red">STÁB ÉS STATISZTA JELENTKEZÉS</span>
+                    </h1>
                     <p className="text-xs sm:text-sm md:text-base text-muted max-w-3xl leading-relaxed">
-                        2026. március 29-én (vasárnap) egyetemi jelenetet forgatunk. Gyülekező 12:40-kor a gödöllői campus előtti szökőkútnál
-                        (Páter Károly utca 1.), a felvétel 13:00-16:00 között zajlik. Önkéntes statisztákat keresünk hétköznapi
-                        civil ruhában – nincs díjazás, viszont ellátást és háttértámogatást kapsz. A kitöltés után belső listára kerülsz,
-                        és visszaigazolást küldünk a részletekkel + titoktartási tudnivalókkal.
+                        A TITOK produkció egy folyamatosan bővülő filmes közösség. Ha érdekel a filmkészítés világa,
+                        legyen szó kamerák előtti (statiszta, mellékszereplő) vagy mögötti (világosító, csapó, kellékes, runner)
+                        munkáról, töltsd ki az alábbi űrlapot. Jelentkezéseddel egy központi bázisba kerülsz, és ha az
+                        adott forgatáshoz szükség van rád, a megadott e-mail címen felvesszük veled a kapcsolatot.
                     </p>
                 </div>
 
-                <div className="grid gap-3 sm:gap-4 md:grid-cols-3 text-xs sm:text-sm text-muted">
-                    <InfoCard title="Időpont" highlighted="2026. március 29. (vasárnap)">
-                        13:00 – 16:00 / forgatás, gyülekező 12:40-kor.
+                <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 md:grid-cols-3 text-xs sm:text-sm text-muted">
+                    <InfoCard title="Kik jelentkezhetnek?" highlighted="Bárki, előképzettség nélkül">
+                        Hobbi filmesek vagy lelkes érdeklődők.
                     </InfoCard>
-                    <InfoCard title="Helyszín" highlighted="Gödöllő – Szőkőkút">
-                        {LOCATION_ADDRESS}. Gyülekező 12:40.
+                    <InfoCard title="Mikor lesz forgatás?" highlighted="Változó (Hétvégék)">
+                        Többnyire szombat/vasárnap zajlanak a napi 3-6 órás forgatási blokkok.
                     </InfoCard>
-                    <InfoCard title="Dress code" highlighted="Sima hétköznapi ruha">
-                        Civil, logómentes, neutrális színek. Hozz kényelmes cipőt.
+                    <InfoCard title="Díjazás & Ellátás" highlighted="Önkéntes, cserébe catering">
+                        Nincs gázsi, viszont forgatásonként étkezést és italt biztosítunk az egész stábnak.
                     </InfoCard>
                 </div>
 
@@ -154,68 +154,41 @@ export default function ExtrasForm() {
                             />
                         </Field>
 
-                        <Field label="OTT LESZEK" required>
+                        <Field label="Érdekel" required>
                             <div className="border border-white/10 bg-black/60 p-3 text-[11px] sm:text-xs text-muted">
                                 <label className="flex items-start gap-3 cursor-pointer touch-manipulation">
                                     <input
                                         type="checkbox"
-                                        checked={attendanceCommit}
-                                        onChange={(e) => setAttendanceCommit(e.target.checked)}
+                                        checked={databaseCommit}
+                                        onChange={(e) => setDatabaseCommit(e.target.checked)}
                                         className="mt-0.5 accent-red-800"
                                         disabled={isPending}
                                     />
-                                    <span>Bejelölöm, hogy 12:40-re a gödöllői szökőkútnál leszek, és végig maradok a 13:00-16:00 közötti forgatáson.</span>
+                                    <span>Hozzájárulok, hogy adataim bekerüljenek a produkció szereplő-/stábbázisába, és értesítsenek jövőbeli forgatásokkal kapcsolatban.</span>
                                 </label>
                             </div>
                         </Field>
 
-                        <Field label="MIBE SZÁMÍTHATUNK_RÁD?" hint="Pl. statiszta, runner, kellékfelelős. Opcionális">
+                        <Field label="MIBEN TUDNÁL SEGÍTENI?" hint="Pl. statiszta, világító, kameraman, runner...">
                             <input
                                 type="text"
                                 value={preferredRole}
                                 onChange={(e) => setPreferredRole(e.target.value)}
-                                placeholder="pl. háttér statiszta / praktikus effekt"
+                                placeholder="pl. háttér statiszta / hangosítás érdekel"
                                 className={inputClass}
                                 disabled={isPending}
                             />
                         </Field>
 
-                        <Field label="MEGJEGYZÉS" hint="Speciális igény, érkezés, saját kellék, allergia, stb.">
+                        <Field label="MEGJEGYZÉS" hint="Rendelkezésre állásod (pl. csak szombat jó), bármilyen extra infó">
                             <textarea
                                 value={notes}
                                 onChange={(e) => setNotes(e.target.value)}
                                 rows={4}
                                 className={`${inputClass} resize-none`}
-                                placeholder="pl. 15:30-ig tudok maradni / laktózérzékeny vagyok / hozok saját táskát."
+                                placeholder="pl. Hétvégente általában szabad vagyok. Hoztam már statiszta múltat...stb."
                                 disabled={isPending}
                             />
-                        </Field>
-
-                        <Field label="PIZZA OPCIÓ" required hint="Jelölj egyet: magyaros vagy vegetáriánus.">
-                            <div className="flex flex-wrap gap-4 sm:gap-6 border border-white/10 bg-black/60 p-3">
-                                <label className="flex items-center gap-3 cursor-pointer text-xs sm:text-sm text-muted touch-manipulation min-h-[44px]">
-                                    <input
-                                        type="radio"
-                                        name="pizza"
-                                        checked={pizzaPreference === 'magyaros'}
-                                        onChange={() => setPizzaPreference('magyaros')}
-                                        className="accent-red-800"
-                                        disabled={isPending}
-                                    />
-                                    <span>Magyaros</span>
-                                </label>
-                                <label className="flex items-center gap-3 cursor-pointer text-xs sm:text-sm text-muted touch-manipulation min-h-[44px]">
-                                    <input
-                                        type="radio"
-                                        name="pizza"
-                                        checked={pizzaPreference === 'vegetarian'}
-                                        onChange={() => setPizzaPreference('vegetarian')}
-                                        className="accent-red-800"
-                                        disabled={isPending}
-                                    />
-                                    <span>Vegetáriánus</span>
-                                </label>
-                            </div>
                         </Field>
 
                         <div className="space-y-3">
@@ -228,7 +201,7 @@ export default function ExtrasForm() {
                                     disabled={isPending}
                                 />
                                 <span>
-                                    Elfogadom, hogy a részvétel önkéntes, nincs pénzbeli díjazás, és betartom a házirendet / titoktartást.
+                                    Elfogadom, hogy a részvétel önkéntes, nincs pénzbeli díjazás, és adott esetben a forgatások házirendjét betartom.
                                 </span>
                             </label>
                         </div>
@@ -236,9 +209,9 @@ export default function ExtrasForm() {
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="w-full min-h-[48px] py-3.5 sm:py-4 bg-red-900/20 border border-red-900/50 text-red-400 font-heading text-sm sm:text-base tracking-[0.3em] sm:tracking-[0.4em] uppercase hover:bg-red-900/40 transition-all duration-200 disabled:opacity-30 s29-btn touch-manipulation active:scale-[0.99]"
+                            className="w-full min-h-[48px] py-3.5 sm:py-4 bg-red-900/20 border border-red-900/50 text-red-400 font-heading text-sm sm:text-base tracking-[0.3em] sm:tracking-[0.4em] uppercase hover:bg-red-900/40 transition-all duration-200 disabled:opacity-30 rec-btn touch-manipulation active:scale-[0.99]"
                         >
-                            {isPending ? 'FELDOLGOZÁS…' : 'JELENTKEZEM'}
+                            {isPending ? 'FELDOLGOZÁS…' : 'JELENTKEZEM A STÁBBA'}
                         </button>
 
                         {status === 'success' && (
@@ -255,7 +228,7 @@ export default function ExtrasForm() {
 
                     <aside className="space-y-4 sm:space-y-6 bg-black/40 border border-white/5 p-4 md:p-6">
                         <div className="space-y-2 sm:space-y-3">
-                            <p className="text-[10px] sm:text-xs font-mono tracking-[0.3em] text-red-500 uppercase">HÁZIREND / CODE OF CONDUCT</p>
+                            <p className="text-[10px] sm:text-xs font-mono tracking-[0.3em] text-red-500 uppercase">ÁLTALÁNOS INFORMÁCIÓK</p>
                             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted">
                                 {conductPoints.map((rule) => (
                                     <li key={rule} className="flex gap-3">
@@ -267,55 +240,14 @@ export default function ExtrasForm() {
                         </div>
 
                         <div className="space-y-2 text-xs sm:text-sm text-muted">
-                            <p className="font-semibold text-white/80">Mit biztosítunk</p>
-                            <ul className="space-y-1">
-                                <li>• Helyszíni víz + pizza rendelés (vegetáriánus opció is)</li>
-                                <li>• Pihenő / táska lerakó + stábkapcsolattartó</li>
-                                <li>• 3 órás forgatás: 13:00-16:00 (gyülekező 12:40, késés nélkül)</li>
-                            </ul>
-                        </div>
-
-                        <div className="space-y-2 text-xs sm:text-sm text-muted">
                             <p className="font-semibold text-white/80">Adatkezelés</p>
                             <p className="text-xs leading-relaxed">
-                                Csak a megadott adatokat tároljuk (név, e-mail, elérhetőség). Nem kérünk lakcímet, telefonszámot.
-                                Az adatokat kizárólag a március 29-i forgatás szervezéséhez használjuk.
+                                A megadott adatokat szigorúan bizalmasan kezeljük, kizárólag a produkció stábbázisában tároljuk.
+                                Kéretlen reklámlevelet nem küldünk.
                             </p>
-                            <p className="text-xs">
+                            <p className="text-xs mt-2">
                                 Kérdés? <a href="mailto:info@titoksorozat.hu" className="text-red-500 underline">info@titoksorozat.hu</a>
                             </p>
-                        </div>
-
-                        <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted">
-                            <p className="font-semibold text-white/80">Google Térkép</p>
-                            <div className="aspect-video min-h-[180px] border border-white/10 bg-black/50">
-                                <iframe
-                                    src={MAP_EMBED}
-                                    className="w-full h-full"
-                                    loading="lazy"
-                                    referrerPolicy="no-referrer-when-downgrade"
-                                    allowFullScreen
-                                    style={{ filter: 'grayscale(1) contrast(1.2) brightness(0.65)' }}
-                                />
-                            </div>
-                            <div className="flex flex-col sm:flex-row flex-wrap gap-2 text-xs">
-                                <button
-                                    type="button"
-                                    onClick={handleCopyAddress}
-                                    className="min-h-[44px] px-3 py-2.5 sm:py-1 border border-white/10 text-white/80 hover:border-red-700 hover:text-red-400 transition touch-manipulation"
-                                >
-                                    Cím másolása
-                                </button>
-                                <a
-                                    href={MAP_LINK}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="min-h-[44px] flex items-center justify-center px-3 py-2.5 sm:py-1 border border-red-800 text-red-400 hover:bg-red-900/30 transition touch-manipulation"
-                                >
-                                    Megnyitom Google Térképen
-                                </a>
-                            </div>
-                            <p className="text-[11px] sm:text-xs leading-relaxed">Gyülekező: {LOCATION_ADDRESS} (szökőkút körgyűrű).</p>
                         </div>
                     </aside>
                 </section>
@@ -341,8 +273,8 @@ function InfoCard({ title, highlighted, children }: { title: string; highlighted
     return (
         <div className="border border-white/10 bg-black/50 p-4">
             <p className="text-[10px] font-mono tracking-[0.3em] text-red-400 uppercase mb-2">{title}</p>
-            <p className="text-white font-semibold">{highlighted}</p>
-            <p className="text-xs mt-1 leading-relaxed">{children}</p>
+            <p className="text-white font-semibold mb-1">{highlighted}</p>
+            <p className="text-xs mt-1 leading-relaxed opacity-80">{children}</p>
         </div>
     );
 }

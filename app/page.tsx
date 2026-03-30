@@ -6,6 +6,7 @@ import About from "@/components/About";
 import SeasonsGrid from "@/components/SeasonsGrid";
 import PatreonCTA from "@/components/PatreonCTA";
 import Shop from "@/components/Shop";
+import CommunityCTA from "@/components/CommunityCTA";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import Footer from "@/components/Footer";
 
@@ -46,8 +47,9 @@ export default function Home() {
       <SeasonsGrid />
       <PatreonCTA />
       <Shop />
+      <CommunityCTA />
 
-      <section className="py-20 px-4">
+      <section id="newsletter" className="py-20 px-4">
         <NewsletterSignup />
       </section>
       <Footer />

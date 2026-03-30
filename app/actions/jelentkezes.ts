@@ -93,11 +93,10 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
         }
 
         try {
-            const pizzaLabel = pizzaPreference === 'vegetarian' ? 'Vegetáriánus' : 'Magyaros';
             await transporter.sendMail({
                 from: '"TITOK" <info@titoksorozat.hu>',
                 to: email,
-                subject: 'TITOK – Statiszta jelentkezés visszaigazolása',
+                subject: 'TITOK – Jelentkezés visszaigazolása',
                 html: `
                     <!DOCTYPE html>
                     <html>
@@ -129,17 +128,15 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
                                     <h1 class="logo">TITOK</h1>
                                     <div class="divider"></div>
                                 </div>
-                                <div class="welcome-text">KÖSZÖNJÜNK, ${fullName.toUpperCase()}</div>
+                                <div class="welcome-text">ÜDV A STÁBBAN, ${fullName.toUpperCase()}!</div>
                                 <div class="content">
-                                    <p>Rögzítettük a statiszta jelentkezésed. Az alábbi adatokkal számolunk:</p>
+                                    <p>Sikeresen rögzítettük a jelentkezésed a TITOK produkció adatbázisába.</p>
                                     <div class="list-section">
-                                        <div class="list-item"><span class="bullet">></span> <strong>Időpont:</strong> 2026. március 29. (vasárnap)</div>
-                                        <div class="list-item"><span class="bullet">></span> <strong>Helyszín:</strong> Gödöllő, Páter Károly utca 1. – Szőkőkút</div>
-                                        <div class="list-item"><span class="bullet">></span> <strong>Gyülekező:</strong> 12:40</div>
-                                        <div class="list-item"><span class="bullet">></span> <strong>Pizza:</strong> ${pizzaLabel}</div>
+                                        <div class="list-item"><span class="bullet">></span> <strong>Jelentkező:</strong> ${fullName}</div>
+                                        <div class="list-item"><span class="bullet">></span> <strong>Pozíció / Érdeklődés:</strong> ${preferredRole || 'Általános / Statiszta'}</div>
                                     </div>
-                                    <p style="text-align: center; margin-top: 30px;"><span class="accent-text">Találkozunk vasárnap 12:40-kor Gödöllőn.</span></p>
-                                    <p style="text-align: center; margin-top: 20px; font-size: 12px;">Ha esetleg mégse tudsz jönni, írj az <a href="mailto:info@titoksorozat.hu">info@titoksorozat.hu</a> címre.</p>
+                                    <p style="text-align: center; margin-top: 30px;"><span class="accent-text">Hamarosan keresni fogunk, ha olyan forgatás jön, ahová csapatot építünk.</span></p>
+                                    <p style="text-align: center; margin-top: 20px; font-size: 12px;">Ha időközben kérdésed merülne fel, írj az <a href="mailto:info@titoksorozat.hu">info@titoksorozat.hu</a> címre.</p>
                                 </div>
                                 <div class="footer">
                                     <p>&copy; ${new Date().getFullYear()} TITOK PROJECT</p>
@@ -149,6 +146,23 @@ export async function submitExtrasSignup(formData: ExtrasFormInput) {
                     </body>
                     </html>
                 `,
+            });
+            
+            // Admin notification
+            await transporter.sendMail({
+                from: '"TITOK Rendszer" <info@titoksorozat.hu>',
+                to: 'info@titoksorozat.hu', // You will receive it here
+                subject: `🔥 Új stábtag/statiszta: ${fullName}`,
+                html: `
+                    <h3>Új jelentkezés jött a TITOK stábba/statisztának!</h3>
+                    <ul>
+                        <li><strong>Név:</strong> ${fullName}</li>
+                        <li><strong>Email:</strong> ${email}</li>
+                        <li><strong>Érdeklődési kör:</strong> ${preferredRole || '-'}</li>
+                        <li><strong>Megjegyzés/Ráérés:</strong> ${notes || '-'}</li>
+                    </ul>
+                    <p>Az adatokat megtalálod a /jelentkezes-admin felületen is.</p>
+                `
             });
         } catch (mailErr) {
             console.error('[submitExtrasSignup] Email send error', mailErr);
@@ -178,7 +192,7 @@ export type StatisztaSignup = {
 
 export type StatisztaAdminData = {
     signups: StatisztaSignup[];
-    stats: { total: number; magyaros: number; vegetarian: number };
+    stats: { total: number };
 };
 
 export async function getStatisztaSignups(token: string | null): Promise<{ error: string } | StatisztaAdminData> {
@@ -199,12 +213,10 @@ export async function getStatisztaSignups(token: string | null): Promise<{ error
         }
 
         const signups = (data ?? []) as StatisztaSignup[];
-        const magyaros = signups.filter((s) => s.pizza_preference === 'magyaros').length;
-        const vegetarian = signups.filter((s) => s.pizza_preference === 'vegetarian').length;
 
         return {
             signups,
-            stats: { total: signups.length, magyaros, vegetarian },
+            stats: { total: signups.length },
         };
     } catch (err) {
         console.error('[getStatisztaSignups]', err);
