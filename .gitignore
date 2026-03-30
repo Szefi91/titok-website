@@ -38,6 +38,13 @@ yarn-error.log*
 /google52063c328222e98e.html
 titok4.eved.png
 
+# supabase & db
+supabase/
+*.sql
+
+# media
+/4.mp3
+
 # vercel
 .vercel
 
